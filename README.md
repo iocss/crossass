@@ -21,7 +21,7 @@ A tiny Sass mixin / function library for modular CSS.
 ### Import
 
 ```scss
-@import "crossass/scss/crossass";
+@import "crossass/scss/core";
 ```
 
 ### Module (Placeholder definition)
@@ -394,7 +394,7 @@ Crossass also supports [BEM](http://bem.info/) syntax with BEM extension.
 ### Import
 
 ```scss
-@import "crossass/scss/crossass";
+@import "crossass/scss/core";
 @import "crossass/scss/extension/bem";
 ```
 
