@@ -385,7 +385,7 @@ Variable | Default | Description
 --- | --- | ---
 $x-module-exporting | false | Whether `x-module` mixin should export ruleset(s) that use class selector
 $x-modifier-separator | '-' | The separator for modifiers
-$x-strict-extend | false | `x-extend` mixin uses `!optional` if true
+$x-strict-extend | false | `x-extend` mixin never uses `!optional` if true
 
 ## BEM syntax support
 
