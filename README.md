@@ -160,8 +160,8 @@ CSS:
 }
 ```
 
-You cannot specify the order of multiple inheritance and **Sass outputs rulesets in order of the definitions**.
-This is a restriction of Sass so **the order of rulesets definition is very important** with Crossass.
+You cannot specify the order of multiple inheritance and **Sass outputs rulesets in order of the definition**.
+This is a restriction of Sass so **the order of ruleset definition is very important** with Crossass.
 
 SCSS:
 ```scss
