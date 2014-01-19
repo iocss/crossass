@@ -1,0 +1,21 @@
+{
+  "name": "Crossass",
+  "version": "0.9.0",
+  "description": "A tiny Sass mixin / function library for modular CSS.",
+  "keywords": [
+    "sass",
+    "bem",
+    "mixin",
+    "library"
+  ],
+  "ignore": [
+    "**/.*"
+  ],
+  "authors": [
+    { "name": "Whizark", "homepage": "http://whizark.com" }
+  ],
+  "homepage": "http://github.com/whizark/crossass",
+  "repository": {
+    "type": "git", "url": "git://github.com/whizark/crossass.git"
+  }
+}
