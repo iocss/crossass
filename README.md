@@ -127,7 +127,7 @@ CSS:
 }
 ```
 
-### Extending (multiple iheritance)
+### Extending (multiple inheritance)
 
 `x-extend` mixin allows you to extend a ruleset from multiple rulesets.
 
