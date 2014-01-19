@@ -113,7 +113,9 @@ CSS:
 SCSS:
 ```scss
 @include x-module('module') {
-  border: 1px solid #f00;
+  & {
+    border: 1px solid #f00;
+  }
 }
 .module {
   @include x-extend('module');
