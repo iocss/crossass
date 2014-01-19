@@ -1,0 +1,48 @@
+// BEM extension for Crossass
+//
+// Copyright (c) 2014 Whizark
+// @category bem
+
+// The separator for modifiers
+$x-bem-modifier-separator: '--' !default;
+
+// The separator for element
+$x-bem-element-separator: '__' !default;
+
+// Generates and Returns a selector for modifier
+// @function x-bem-modifier
+// @param    $names         {String...} A modifier name
+// @return                  {List}      The list of selectors
+@function x-bem-modifier($names...) {
+    @return x-prefixer($x-bem-modifier-separator, $names);
+}
+
+// Generates and Returns a selector for element
+// @function x-bem-element
+// @param    $names        {String...} An element name
+// @return                 {List}      The list of selectors
+@function x-bem-element($names...) {
+    @return x-prefixer($x-bem-element-separator, $names);
+}
+
+// Defines modifier
+// @mixin    x-bem-modifier
+// @param    $names         {String} A modifier name
+@mixin x-bem-modifier($name) {
+    $name: unquote($name);
+
+    #{&}#{x-bem-modifier($name)} {
+        @content;
+    }
+}
+
+// Defines element
+// @mixin    x-bem-element
+// @param    $names        {String} An element name
+@mixin x-bem-element($name) {
+    $name: unquote($name);
+
+    #{&}#{x-bem-element($name)} {
+        @content;
+    }
+}
