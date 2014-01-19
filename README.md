@@ -82,7 +82,7 @@ CSS:
 ### Modifier
 
 `x-modifier` mixin generates a suffixed selector.
-The default modifier pattern is `$x-modifier-separator` + the modifier name and the default `$x-modifier-separator` is `-` (see also [Variables](#Variables)).
+The default modifier pattern is `$x-modifier-separator` + the modifier name and the default `$x-modifier-separator` is `-` (see also [Variables](#variables)).
 
 SCSS:
 ```scss
@@ -292,7 +292,7 @@ CSS:
 ### Selector Helper
 
 `x-modifier` function is useful if you want to generate the selector for a module element.
-This function returns the selector that is `$x-modifier-separator` + a modifier name (see also [Variables](#Variables)).
+This function returns the selector that is `$x-modifier-separator` + a modifier name (see also [Variables](#variables)).
 
 SCSS:
 ```scss
