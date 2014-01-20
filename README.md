@@ -329,7 +329,7 @@ CSS:
 }
 ```
 
-`x-modifier` function can generate multiple selector at once.
+`x-modifier` function can generate multiple selectors at once.
 In Addition, you can also use multiple `x-modifier` function in `x-extend` mixin.
 
 SCSS:
