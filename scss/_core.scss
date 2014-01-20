@@ -77,12 +77,14 @@ $x-strict-extend: false !default;
 
 // Defines module element with modifier
 // @mixin x-modifier
-// @param $names     {String} A modifier name
-@mixin x-modifier($name) {
-    $name: unquote($name);
+// @param $names     {String...} Modifier name(s)
+@mixin x-modifier($names...) {
+    @each $name in $names {
+        $name: unquote($name);
 
-    #{&}#{x-modifier($name)} {
-        @content;
+        #{&}#{x-modifier($name)} {
+            @content;
+        }
     }
 }
 // Extends ruleset(s) from a module

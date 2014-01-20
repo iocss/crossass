@@ -27,22 +27,26 @@ $x-bem-element-separator: '__' !default;
 
 // Defines modifier
 // @mixin    x-bem-modifier
-// @param    $names         {String} A modifier name
-@mixin x-bem-modifier($name) {
-    $name: unquote($name);
+// @param    $names         {String...} Modifier name(s)
+@mixin x-bem-modifier($names...) {
+    @each $name in $names {
+        $name: unquote($name);
 
-    #{&}#{x-bem-modifier($name)} {
-        @content;
+        #{&}#{x-bem-modifier($name)} {
+            @content;
+        }
     }
 }
 
 // Defines element
 // @mixin    x-bem-element
-// @param    $names        {String} An element name
-@mixin x-bem-element($name) {
-    $name: unquote($name);
+// @param    $names        {String...} Element name(s)
+@mixin x-bem-element($names...) {
+    @each $name in $names {
+        $name: unquote($name);
 
-    #{&}#{x-bem-element($name)} {
-        @content;
+        #{&}#{x-bem-element($name)} {
+            @content;
+        }
     }
 }

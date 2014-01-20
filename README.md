@@ -106,6 +106,33 @@ CSS:
 }
 ```
 
+You can also define multiple selectors at once.
+
+SCSS:
+```scss
+@include x-module('module', true) {
+  & {
+    border: 1px solid #000;
+  }
+  @include x-modifier('information', 'important') {
+    margin: 8px;
+  }
+}
+```
+
+CSS:
+```css
+.module {
+    border: 1px solid #f00;
+}
+.module-information {
+    margin: 8px;
+}
+.module-important {
+    margin: 8px;
+}
+```
+
 ### Extending
 
 `x-extend` mixin is similar with `@extend`.
