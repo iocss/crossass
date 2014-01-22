@@ -37,9 +37,9 @@ $x-strict-extend: false !default;
     @return x-prefixer($x-modifier-separator, $names);
 }
 
-// Flattens (split and joins) multiple lists
+// Flattens list that includes nested list.
 // @function x-flatten
-// @param    $list     {List} List(s) to flatten
+// @param    $list     {List} The list to be flatten
 // @return             {List} The flattened list
 @function x-flatten($list) {
     $flattened: ();
