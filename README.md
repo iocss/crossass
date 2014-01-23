@@ -32,11 +32,9 @@ A Sass mixin / function library for modular CSS.
 SCSS:
 ```scss
 @include x-module('module') {
-  & {
-    border: 1px solid #000;
-    strong {
-      color: #f00;
-    }
+  border: 1px solid #000;
+  strong {
+    color: #f00;
   }
 }
 .module {
@@ -61,11 +59,9 @@ By passing `true` to 2nd parameter, you can also export ruleset(s) that use clas
 SCSS:
 ```scss
 @include x-module('module', true) {
-  & {
-    border: 1px solid #000;
-    strong {
-      color: #f00;
-    }
+  border: 1px solid #000;
+  strong {
+    color: #f00;
   }
 }
 ```
@@ -88,9 +84,7 @@ The default modifier pattern is `$x-modifier-separator` + the modifier name and 
 SCSS:
 ```scss
 @include x-module('module', true) {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('important') {
     border-color: #f00;
   }
@@ -112,9 +106,7 @@ You can also define multiple selectors at once.
 SCSS:
 ```scss
 @include x-module('module', true) {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('information', 'important') {
     margin: 8px;
   }
@@ -141,9 +133,7 @@ CSS:
 SCSS:
 ```scss
 @include x-module('module') {
-  & {
-    border: 1px solid #f00;
-  }
+  border: 1px solid #f00;
 }
 .module {
   @include x-extend('module');
@@ -164,14 +154,10 @@ CSS:
 SCSS:
 ```scss
 @include x-module('module-1') {
-  & {
-    border: 1px solid #f00;
-  }
+  border: 1px solid #f00;
 }
 @include x-module('module-2') {
-  & {
-    background: #000;
-  }
+  background: #000;
 }
 .module {
   @include x-extend('module-1', 'module-2');
@@ -194,15 +180,11 @@ This is a restriction of Sass so **the order of ruleset definition is very impor
 SCSS:
 ```scss
 @include x-module('module-1') {
-  & {
-    border: 1px solid #f00;
-    background: #f00;
-  }
+  border: 1px solid #f00;
+  background: #f00;
 }
 @include x-module('module-2') {
-  & {
-    background: #000;
-  }
+  background: #000;
 }
 .module {
   @include x-extend('module-1', 'module-2');
@@ -227,9 +209,7 @@ You can extend a ruleset with specific module element at once.
 SCSS:
 ```scss
 @include x-module('block') {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('header') {
     font-size: 1.5em;
   }
@@ -271,9 +251,7 @@ You can still use multiple inheritance.
 SCSS:
 ```scss
 @include x-module('block-1') {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('header') {
     font-size: 1.5em;
   }
@@ -327,9 +305,7 @@ This function returns the selector that is `$x-modifier-separator` + a modifier 
 SCSS:
 ```scss
 @include x-module('block') {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('body') {
     margin: 1em;
   }
@@ -363,9 +339,7 @@ In addition, you can also use multiple `x-modifier` function in `x-extend` mixin
 SCSS:
 ```scss
 @include x-module('block') {
-  & {
-    border: 1px solid #000;
-  }
+  border: 1px solid #000;
   @include x-modifier('header') {
     font-size: 1.5em;
   }

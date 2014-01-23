@@ -29,11 +29,13 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-modifier
 // @param    $names         {String...} Modifier name(s)
 @mixin x-bem-modifier($names...) {
-    @each $name in $names {
-        $name: unquote($name);
+    @at-root{
+        @each $name in $names {
+            $name: unquote($name);
 
-        #{&}#{x-bem-modifier($name)} {
-            @content;
+            #{&}#{x-bem-modifier($name)} {
+                @content;
+            }
         }
     }
 }
@@ -42,11 +44,13 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-element
 // @param    $names        {String...} Element name(s)
 @mixin x-bem-element($names...) {
-    @each $name in $names {
-        $name: unquote($name);
+    @at-root{
+        @each $name in $names {
+            $name: unquote($name);
 
-        #{&}#{x-bem-element($name)} {
-            @content;
+            #{&}#{x-bem-element($name)} {
+                @content;
+            }
         }
     }
 }

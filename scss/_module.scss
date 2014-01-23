@@ -137,16 +137,12 @@ $x--modules: ();
     @include x-debug($x--modules);
 
     %#{$name} {
-        @at-root {
-            @content;
-        }
+        @content;
     }
 
     @if $exporting {
         .#{$name} {
-            @at-root {
-                @content;
-            }
+            @content;
         }
     }
 }
@@ -185,11 +181,13 @@ $x--modules: ();
 // @mixin x-modifier
 // @param $names     {String...} Modifier name(s)
 @mixin x-modifier($names...) {
-    @each $name in $names {
-        $name: unquote($name);
+    @at-root {
+        @each $name in $names {
+            $name: unquote($name);
 
-        #{&}#{x-modifier($name)} {
-            @content;
+            #{&}#{x-modifier($name)} {
+                @content;
+            }
         }
     }
 }
