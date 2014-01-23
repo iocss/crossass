@@ -76,6 +76,9 @@ $x-inspector-indent-size: 4 !default;
     @return $lines;
 }
 
+// Styles for the Crossass Inspector Toolbar header
+// @mixin x-inspector--toolbar-header
+// @private
 @mixin x-inspector--toolbar-header() {
     content: "\f06e  Crossass Inspector" !important;
     display: block !important;
