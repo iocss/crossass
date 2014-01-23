@@ -26,3 +26,20 @@
 
     @return $merged;
 }
+
+// Removes an element having the specified key from a map
+// @function x-map-remove
+// @param    $map {Map} The map having the element to be removed
+// @param    $key {*}   The key of the element to be removed
+// @return        {Map} The map excluding the element having $key
+@function x-map-remove($map, $key) {
+    $removed: ();
+
+    @each $_key, $_value in $map {
+        @if ($_key != $key) {
+            $removed: map-merge($removed, ($_key: $_value));
+        }
+    }
+
+    @return $removed;
+}
