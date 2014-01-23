@@ -192,37 +192,37 @@ $x--modules: ();
 // @param $modules {String|Map...} Module name(s) to extend, or map(s) to extend with module element(s)
 //                                 {module-name: ('suffix', ...), ...}
 @mixin x-extend($modules...) {
-    @at-root {
-        @each $module in $modules {
-            @if not x-is-map($module) {
-                $module: (
-                    #{$module}: ()
-                )
+    @each $module in $modules {
+        @if not x-is-map($module) {
+            $module: (
+                #{$module}: ()
+            )
+        }
+
+        @each $name, $suffixes in $module {
+            $suffixes: x-list-flatten($suffixes);
+
+            & {
+                @if $x-strict-extend {
+                    @extend %#{$name};
+                } @else {
+                    @extend %#{$name} !optional;
+                }
             }
 
-            @each $name, $suffixes in $module {
-                $suffixes: x-list-flatten($suffixes);
-
-                & {
+            @each $suffix in $suffixes {
+                #{&}#{$suffix} {
                     @if $x-strict-extend {
-                        @extend %#{$name};
+                        @extend %#{$name}#{$suffix};
                     } @else {
-                        @extend %#{$name} !optional;
-                    }
-                }
-
-                @each $suffix in $suffixes {
-                    #{&}#{$suffix} {
-                        @if $x-strict-extend {
-                            @extend %#{$name}#{$suffix};
-                        } @else {
-                            @extend %#{$name}#{$suffix} !optional;
-                        }
+                        @extend %#{$name}#{$suffix} !optional;
                     }
                 }
             }
         }
+    }
 
+    & {
         @content;
     }
 }

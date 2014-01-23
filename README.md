@@ -177,6 +177,32 @@ CSS:
 }
 ```
 
+### Extending (overriding)
+
+You might override some declarations inside `x-extend` mixin.
+
+SCSS:
+```scss
+@include x-module('module') {
+  border: 1px solid #f00;
+}
+.module {
+  @include x-extend('module') {
+    border-width: 2px;
+  }
+}
+```
+
+CSS:
+```css
+.module {
+    border: 1px solid #f00;
+}
+.module {
+    border-width: 2px;
+}
+```
+
 ### Extending (multiple inheritance)
 
 `x-extend` mixin allows you to extend a ruleset from multiple rulesets.
@@ -254,9 +280,7 @@ SCSS:
   @include x-extend((
     block: ('-header', '-body')
   ));
-  & {
-    background: #f00;
-  }
+  background: #f00;
 }
 ```
 
@@ -302,9 +326,7 @@ SCSS:
     block-1: ('-header', '-body'),
     block-2: ('-footer'),
   ));
-  & {
-    background: #f00;
-  }
+  background: #f00;
 }
 ```
 
@@ -344,9 +366,7 @@ SCSS:
   @include x-extend((
     block: (x-modifier('body'))
   ));
-  & {
-    background: #f00;
-  }
+  background: #f00;
 }
 ```
 
@@ -386,9 +406,7 @@ SCSS:
       x-modifier('header', 'body'),
       x-modifier('footer')
   ));
-  & {
-    background: #f00;
-  }
+  background: #f00;
 }
 ```
 
