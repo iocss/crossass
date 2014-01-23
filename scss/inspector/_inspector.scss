@@ -90,6 +90,16 @@ $x-inspector-indent-size: 4 !default;
     background: #f3f3f3 !important;
     font: 13px/normal monospace !important;
     white-space: pre-wrap !important;
+
+    @if $x-inspector-toolbar-position == 'top' {
+        border-bottom-width: 1px !important;
+        box-shadow: 0 4px 4px #f9f9f9 !important;
+    }
+
+    @if $x-inspector-toolbar-position == 'bottom' {
+        border-top-width: 1px !important;
+        box-shadow: 0 -4px 4px #f9f9f9 !important;
+    }
 }
 
 // Outputs variable-information
@@ -112,16 +122,12 @@ $x-inspector-indent-size: 4 !default;
         @if $x-inspector-toolbar-position == 'top' {
             html::before {
                 @include x-inspector--toolbar($content);
-                border-bottom-width: 1px !important;
-                box-shadow: 0 4px 4px #f9f9f9 !important;
             }
         }
 
         @if $x-inspector-toolbar-position == 'bottom' {
             html::after {
                 @include x-inspector--toolbar($content);
-                border-top-width: 1px !important;
-                box-shadow: 0 -4px 4px #f9f9f9 !important;
             }
         }
     }
