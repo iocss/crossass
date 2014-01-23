@@ -60,3 +60,23 @@
 @function x-is-null($variable) {
     @return $variable == null;
 }
+
+// Returns whether a variable is empty
+// @function x-is-empty
+// @param    $variable {*}    The variable to be test
+// @return             {Bool} True if the variable is empty, otherwise false
+@function x-is-empty($variable) {
+    @if x-is-null($variable) {
+        @return true;
+    }
+
+    @if x-is-string($variable) and $variable == '' {
+        @return true;
+    }
+
+    @if x-is-list($variable) and length($variable) == 0 {
+        @return true;
+    }
+
+    @return false;
+}
