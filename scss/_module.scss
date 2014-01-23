@@ -12,6 +12,9 @@ $x-modifier-separator: '-' !default;
 // `x-extend` mixin uses `!optional` if true
 $x-strict-extend: false !default;
 
+// The module storage to be used for storing module information
+$x--modules: ();
+
 @import "variable";
 @import "list";
 
@@ -36,6 +39,61 @@ $x-strict-extend: false !default;
 // @return              {List}      The list of selectors
 @function x-modifier($names...) {
     @return x-prefixer($x-modifier-separator, $names);
+}
+
+// Returns or sets module attributes
+// @function x-module--module
+// @private
+// @param    $name       {String} The module name
+// @param    $attributes {Map}    The attributes to be set to the module
+// @return               {Map}    The module attributes
+@function x-module--module($name, $attributes: null) {
+    @if not x-is-null($attributes) and not x-is-map($attributes) {
+        @warn 'The attribute(s) of module must be a Map.';
+    }
+
+    @if x-is-null($attributes) {
+        $attributes: map-get($x--modules, $name)
+    } @else {
+        $module: (
+            $name: $attributes
+        );
+
+        $x--modules: map-merge($x--modules, $module) !global;
+    }
+
+    @return $attributes;
+}
+
+// Returns or sets a module attribute
+// @function x-module--attr
+// @private
+// @param    $name  {String} The module name
+// @param    $key   {*}      The key of the attribute
+// @param    $value {*}      The value to be set to the key
+// @return          {*}      The value of the attribute
+@function x-module--attr($name, $key, $value: null) {
+    @if not x-module-exists($name) {
+        @warn 'The module "#{$name}" doesn\'t exist.';
+    }
+
+    @if x-is-null($value) {
+        $value: map-get(x-module--module($name), $key);
+    } @else {
+        $attributes: x-module--module($name);
+        $attributes: map-merge($attributes, ($key: $value));
+        $modules: x-module--module($name, $attributes);
+    }
+
+    @return $value;
+}
+
+// Returns whether a module exists
+// @function x-module-exists
+// @param    $name {String} The module name
+// @return         {Bool}   True if the module exists, otherwise false
+@function x-module-exists($name) {
+    @return map-has-key($x--modules, $name);
 }
 
 // Defines module and produces ruleset(s) that use Placeholder selector
