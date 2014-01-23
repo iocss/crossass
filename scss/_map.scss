@@ -18,7 +18,9 @@
                 $value: x-map-merge(map-get($merged, $key), $value);
             }
 
-            $merged: map-merge($merged, ($key: $value));
+            @if not x-is-null($key) {
+                $merged: map-merge($merged, ($key: $value));
+            }
         }
     }
 
