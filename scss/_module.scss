@@ -163,16 +163,12 @@ $x--modules: ();
     @include x-debug($x--modules);
 
     %#{$name} {
-        @at-root {
-            @content;
-        }
+        @content;
     }
 
     @if $exporting {
         .#{$name} {
-            @at-root {
-                @content;
-            }
+            @content;
         }
     }
 }
