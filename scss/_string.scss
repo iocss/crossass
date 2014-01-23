@@ -26,7 +26,7 @@
 // @function x-str-split
 // @param    $string    {String} The string to be split
 // @param    $delimiter {String} The delimiter to split the string
-// @return              {List}   The List of the splitted strings
+// @return              {List}   The list of the splitted strings
 @function x-str-split($string, $delimiter: ' ') {
     $list: ();
     $index: str-index($string, $delimiter);
