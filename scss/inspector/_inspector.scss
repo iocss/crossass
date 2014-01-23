@@ -76,30 +76,71 @@ $x-inspector-indent-size: 4 !default;
     @return $lines;
 }
 
+@mixin x-inspector--toolbar-header() {
+    content: "\f06e  Crossass Inspector" !important;
+    display: block !important;
+    position: absolute !important;
+    z-index: 1000 !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1em !important;
+    border: 1px solid #e5e5e5 !important;
+    background-color: #f3f3f3 !important;
+    background-image: -moz-linear-gradient(#f9f9f9, #f3f3f3) !important;
+    background-image: -webkit-linear-gradient(#f9f9f9, #f3f3f3) !important;
+    background-image: linear-gradient(#f9f9f9, #f3f3f3) !important;
+    box-shadow: 0 4px 4px #f3f3f3 !important;
+    font: 13px/normal CrossassFontAwesome, sans-serif !important;
+    color: #333 !important;
+    text-shadow: 1px 1px #fff !important;
+
+    @if $x-inspector-toolbar-position == 'top' {
+        top: 0 !important;
+    }
+
+    @if $x-inspector-toolbar-position == 'bottom' {
+        bottom: -3em !important;
+    }
+}
+
 // Styles for the Crossass Inspector Toolbar
 // @mixin x-inspector--toolbar
 // @private
 // @param $content {String} The content to be shown
 @mixin x-inspector--toolbar($content: '') {
+    @font-face {
+        font-family: 'CrossassFontAwesome';
+        src: url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?v=4.0.3');
+        src: url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @at-root {
+        html, body {
+            -moz-box-sizing: border-box !important;
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            height: 100% !important;
+        }
+    }
+
     content: $content !important;
     display: block !important;
-    margin: 0 !important;
-    padding: 1em !important;
-    border: 0 solid #e5e5e5 !important;
-    color: #333 !important;
-    background: #f3f3f3 !important;
-    font: 13px/normal monospace !important;
     white-space: pre-wrap !important;
-
-    @if $x-inspector-toolbar-position == 'top' {
-        border-bottom-width: 1px !important;
-        box-shadow: 0 4px 4px #f9f9f9 !important;
-    }
-
-    @if $x-inspector-toolbar-position == 'bottom' {
-        border-top-width: 1px !important;
-        box-shadow: 0 -4px 4px #f9f9f9 !important;
-    }
+    position: relative !important;
+    z-index: 999 !important;
+    margin: 3em 0 0 0 !important;
+    padding: 1.5em 1em !important;
+    border: 0 solid #e5e5e5 !important;
+    border-right-width: 1px !important;
+    border-bottom-width: 1px !important;
+    border-left-width: 1px !important;
+    background: #f9f9f9 !important;
+    font: 13px/normal monospace !important;
+    color: #333 !important;
 }
 
 // Outputs variable-information
@@ -123,9 +164,15 @@ $x-inspector-indent-size: 4 !default;
             html::before {
                 @include x-inspector--toolbar($content);
             }
+            html::after {
+                @include x-inspector--toolbar-header();
+            }
         }
 
         @if $x-inspector-toolbar-position == 'bottom' {
+            html::before {
+                @include x-inspector--toolbar-header();
+            }
             html::after {
                 @include x-inspector--toolbar($content);
             }
