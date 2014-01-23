@@ -80,3 +80,19 @@
 
     @return false;
 }
+
+// Returns whether a variable is blank
+// @function x-is-blank
+// @param    $variable {*}    The variable to be test
+// @return             {Bool} True if the variable is blank, otherwise false
+@function x-is-blank($variable) {
+    @if x-is-empty($variable) {
+        @return true;
+    }
+
+    @if x-is-string($variable) and $variable == x-str-repeat(' ', str-length($variable)) {
+        @return true;
+    }
+
+    @return false;
+}
