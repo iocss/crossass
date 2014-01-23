@@ -101,6 +101,27 @@ $x--modules: ();
     @return $value;
 }
 
+// Returns parent module attributes
+// @function x-module--parent
+// @private
+// @param    $name       {String} The module name
+// @return               {Map}    The parent module attributes
+@function x-module--parent($name) {
+    $parent-name: x-module--attr($name, 'parent');
+    $parent: x-module--module($parent-name);
+
+    @return $parent;
+}
+
+// Returns whether a module has the parent module
+// @function x-module--has-parent
+// @private
+// @param    $name {String} The module name
+// @return         {Bool}   True if the module has the parent module, otherwise false
+@function x-module--has-parent($name) {
+    @return not x-is-null(x-module--parent($name));
+}
+
 // Register new module
 // @function x-module--register
 // @private
