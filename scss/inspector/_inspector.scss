@@ -12,16 +12,18 @@ $x-inspector-display: true !default;
 // The position to display debug information.
 $x-inspector-display-position: 'bottom' !default;
 
+// The indent size (space) for the variable inspection.
+$x-inspector-indent-size: 4 !default;
+
 // Walks a variable recursively and returns the information
 // @function x-inspector--walk
 // @private
 // @param    $variable        {*}      The variable to be walked
 // @param    $recursion-level {Number} The level of the recursive call (internally used)
-// @return                    {List}   The list of lines that include variable-information
+// @return                  the   {List}   The list of lines that include variable-information
 @function x-inspector--walk($variable, $recursion-level: 0) {
     $lines: ();
-    $indent-spaces: 4;
-    $indent: x-str-repeat(' ', $recursion-level * $indent-spaces);
+    $indent: x-str-repeat(' ', $recursion-level * $x-inspector-indent-size);
 
     $type: type-of($variable);
     $line: $indent + '(#{$type}) ';
@@ -31,14 +33,14 @@ $x-inspector-display-position: 'bottom' !default;
         $lines: append($lines, $line);
 
         @each $key, $value in $variable {
-            $line: $indent + x-str-repeat(' ', $indent-spaces) + '#{$key}: ';
+            $line: $indent + x-str-repeat(' ', $x-inspector-indent-size) + '#{$key}: ';
 
             @if $value == null {
                 $line: $line + '(#{type-of($value)})';
                 $lines: append($lines, $line);
             } @else {
                 $child: x-inspector--walk($value, $recursion-level + 1);
-                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $indent-spaces * ($recursion-level + 1) + 1)));
+                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $x-inspector-indent-size * ($recursion-level + 1) + 1)));
             }
         }
 

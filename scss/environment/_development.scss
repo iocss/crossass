@@ -15,4 +15,7 @@ $x-inspector-display: true !default;
 // The position to display debug information.
 $x-inspector-display-position: 'bottom' !default;
 
+// The indent size (space) for the variable inspection.
+$x-inspector-indent-size: 4 !default;
+
 @import "../inspector/inspector";
