@@ -97,7 +97,7 @@ CSS:
     border: 1px solid #f00;
 }
 .module-important {
-    color: #f00;
+    border-color: #f00;
 }
 ```
 
