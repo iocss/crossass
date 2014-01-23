@@ -130,8 +130,8 @@ $x--modules: ();
 
 // Defines a base module and produces ruleset(s) that use Placeholder selector
 // @mixin x-module
-// @param $name      {String}  The module name
-// @param $exporting {Boolean} Whether export ruleset(s) that use class selector
+// @param $name      {String} The module name
+// @param $exporting {Bool}   Whether export ruleset(s) that use class selector
 @mixin x-module($name, $exporting: $x-module-exporting) {
     $module: x-module--register(
         $name,
@@ -155,9 +155,9 @@ $x--modules: ();
 
 // Defines a sub module and produces ruleset(s) that use Placeholder selector
 // @mixin x-module-extend
-// @param $name      {String}  The module name
-// @param $parent    {String}  The parent module name to be extended
-// @param $exporting {Boolean} Whether export ruleset(s) that use class selector
+// @param $name      {String} The module name
+// @param $parent    {String} The parent module name to be extended
+// @param $exporting {Bool}   Whether export ruleset(s) that use class selector
 @mixin x-module-extend($name, $parent, $exporting: $x-module-exporting) {
     $module: x-module--register(
         $name,
