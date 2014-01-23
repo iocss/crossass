@@ -6,7 +6,7 @@ A Sass mixin / function library for modular CSS.
 
 * Module definition
 * Class exporting
-* Modifier support
+* Modifier support (also the nesting)
 * Multiple inheritance
 * Selectable extending
 * Selector Helper
@@ -123,6 +123,36 @@ CSS:
 }
 .module-important {
     margin: 8px;
+}
+```
+
+### Modifier (nesting)
+
+`x-modifier` mixin also allows you to nest the declarations.
+
+SCSS:
+```scss
+@include x-module('module', true) {
+  border: 1px solid #000;
+  @include x-modifier('alert') {
+    border-color: #fa0;
+    @include x-modifier('important') {
+      border-color: #f00;
+    }
+  }
+}
+```
+
+CSS:
+```css
+.module {
+    border: 1px solid #f00;
+}
+.module-alert {
+    border-color: #fa0;
+}
+.module-alert-important {
+    border-color: #f00;
 }
 ```
 
