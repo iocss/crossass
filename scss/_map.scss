@@ -1,0 +1,26 @@
+// Map
+//
+// Copyright (c) 2014 Whizark
+// @category map
+
+@import "variable";
+
+// Recursively merges one or more maps
+// @function x-map-merge
+// @param    $maps {Map...} The maps to merge
+// @return         {Map}    The merged map
+@function x-map-merge($maps...) {
+    $merged: nth($maps, 1);
+
+    @for $i from 1 through length($maps) - 1 {
+        @each $key, $value in nth($maps, $i + 1) {
+            @if x-is-map($value) {
+                $value: x-map-merge(map-get($merged, $key), $value);
+            }
+
+            $merged: map-merge($merged, ($key: $value));
+        }
+    }
+
+    @return $merged;
+}
