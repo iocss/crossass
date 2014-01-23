@@ -1,7 +1,7 @@
 {
   "name": "Crossass",
   "version": "0.9.0",
-  "description": "A tiny Sass mixin / function library for modular CSS.",
+  "description": "A Sass mixin / function library for modular CSS.",
   "keywords": [
     "sass",
     "bem",
