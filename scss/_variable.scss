@@ -17,7 +17,7 @@
 // @function x-is-string
 // @param    $variable {*}    The variable to be test
 // @return             {Bool} True if the variable is String, otherwise false
-@function x-is-map($variable) {
+@function x-is-string($variable) {
     @return type-of($variable) == 'string';
 }
 
