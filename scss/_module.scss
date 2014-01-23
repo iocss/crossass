@@ -127,12 +127,42 @@ $x--modules: ();
     @return map-has-key($x--modules, $name);
 }
 
-// Defines module and produces ruleset(s) that use Placeholder selector
+// Defines a base module and produces ruleset(s) that use Placeholder selector
 // @mixin x-module
 // @param $name      {String}  The module name
 // @param $exporting {Boolean} Whether export ruleset(s) that use class selector
 @mixin x-module($name, $exporting: $x-module-exporting) {
     $module: x-module--register($name);
+
+    @include x-debug($x--modules);
+
+    %#{$name} {
+        @at-root {
+            @content;
+        }
+    }
+
+    @if $exporting {
+        .#{$name} {
+            @at-root {
+                @content;
+            }
+        }
+    }
+}
+
+// Defines a sub module and produces ruleset(s) that use Placeholder selector
+// @mixin x-module-extend
+// @param $name      {String}  The module name
+// @param $parent    {String}  The parent module name to be extended
+// @param $exporting {Boolean} Whether export ruleset(s) that use class selector
+@mixin x-module-extend($name, $parent, $exporting: $x-module-exporting) {
+    $module: x-module--register(
+        $name,
+        (
+            parent: $parent
+        )
+    );
 
     @include x-debug($x--modules);
 
