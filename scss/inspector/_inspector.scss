@@ -10,7 +10,7 @@ $x-inspector-debug: true !default;
 $x-inspector-display: true !default;
 
 // The position to display debug information.
-$x-inspector-display-position: 'bottom';
+$x-inspector-display-position: 'bottom' !default;
 
 // Walks a variable recursively and returns the information
 // @function x-inspector--walk
