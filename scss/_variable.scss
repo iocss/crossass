@@ -69,7 +69,8 @@
 // @return                    {List}   The list of lines that include variable-information
 @function x--walk($variable, $recursion-level: 0) {
     $lines: ();
-    $indent: x-str-repeat(' ', $recursion-level * 4);
+    $indent-spaces: 4;
+    $indent: x-str-repeat(' ', $recursion-level * $indent-spaces);
 
     $type: type-of($variable);
     $line: $indent + '(#{$type}) ';
@@ -79,14 +80,14 @@
         $lines: append($lines, $line);
 
         @each $key, $value in $variable {
-            $line: $indent + '    ' + '#{$key}: ';
+            $line: $indent + x-str-repeat(' ', $indent-spaces) + '#{$key}: ';
 
             @if x-is-null($value) {
                 $line: $line + '(#{type-of($value)})';
                 $lines: append($lines, $line);
             } @else {
                 $child: x--walk($value, $recursion-level + 1);
-                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), 5)));
+                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $indent-spaces + 1)));
             }
         }
 
