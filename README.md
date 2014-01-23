@@ -2,6 +2,8 @@
 
 A Sass mixin / function library for modular CSS.
 
+![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
+
 ## Features
 
 * Module definition
