@@ -114,7 +114,7 @@
 }
 
 // Inspects a variable and returns the information
-// @function
+// @function x-inspect
 // @param    $variable {*}    The variable to be inspected
 // @return             {List} The list of lines that include variable-information
 @function x-inspect($variable) {
