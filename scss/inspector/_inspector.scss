@@ -40,7 +40,10 @@ $x-inspector-indent-size: 4 !default;
                 $lines: append($lines, $line);
             } @else {
                 $child: x-inspector--walk($value, $recursion-level + 1);
-                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $x-inspector-indent-size * ($recursion-level + 1) + 1)));
+                $first-line: nth($child, 1);
+                $first-line: str-slice($first-line, $x-inspector-indent-size * ($recursion-level + 1) + 1);
+                $child: set-nth($child, 1, $line + $first-line);
+                $lines: join($lines, $child);
             }
         }
 
