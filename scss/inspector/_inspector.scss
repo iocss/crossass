@@ -6,11 +6,11 @@
 // Whether output debug information using @debug.
 $x-inspector-debug: true !default;
 
-// Whether display debug information on screen.
-$x-inspector-display: true !default;
+// Whether show toolbar on screen.
+$x-inspector-toolbar: true !default;
 
-// The position to display debug information.
-$x-inspector-display-position: 'bottom' !default;
+// The toolbar position.
+$x-inspector-toolbar-position: 'bottom' !default;
 
 // The indent size (space) for the variable inspection.
 $x-inspector-indent-size: 4 !default;
@@ -103,13 +103,13 @@ $x-inspector-indent-size: 4 !default;
             @debug $line;
         }
 
-        @if $x-inspector-display {
+        @if $x-inspector-toolbar {
             $content: $content + $line + '\A ';
         }
     }
 
-    @if $x-inspector-display {
-        @if $x-inspector-display-position == 'top' {
+    @if $x-inspector-toolbar {
+        @if $x-inspector-toolbar-position == 'top' {
             html::before {
                 @include x-inspector--toolbar($content);
                 border-bottom-width: 1px !important;
@@ -117,7 +117,7 @@ $x-inspector-indent-size: 4 !default;
             }
         }
 
-        @if $x-inspector-display-position == 'bottom' {
+        @if $x-inspector-toolbar-position == 'bottom' {
             html::after {
                 @include x-inspector--toolbar($content);
                 border-top-width: 1px !important;

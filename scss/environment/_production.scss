@@ -9,11 +9,11 @@ $x-environment: 'production';
 // Whether output debug information using @debug.
 $x-inspector-debug: false !default;
 
-// Whether display debug information on screen.
-$x-inspector-display: false !default;
+// Whether show toolbar on screen.
+$x-inspector-toolbar: false !default;
 
-// The position to display debug information.
-$x-inspector-display-position: 'bottom' !default;
+// The toolbar position.
+$x-inspector-toolbar-position: 'bottom' !default;
 
 // The indent size (space) for the variable inspection.
 $x-inspector-indent-size: 4 !default;
