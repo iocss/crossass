@@ -11,6 +11,7 @@ A Sass mixin / function library for modular CSS.
 * Selectable extending
 * Selector Helper
 * [BEM](http://bem.info/) syntax support
+* Variable inspection (Crossass Inspector)
 
 ## Requirement
 

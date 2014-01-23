@@ -6,13 +6,13 @@
 // The environment string for development.
 $x-environment: 'development';
 
-@import "../variable";
+// Whether output debug information using @debug.
+$x-inspector-debug: true !default;
 
-// Outputs variable-information for debug
-// @mixin x-debug
-// @param $variable {*} The variable to be debug
-@mixin x-debug($variable) {
-    @each $line in x-inspect($variable) {
-        @debug $line;
-    }
-}
+// Whether display debug information on screen.
+$x-inspector-display: true !default;
+
+// The position to display debug information.
+$x-inspector-display-position: 'bottom' !default;
+
+@import "../inspector/inspector";
