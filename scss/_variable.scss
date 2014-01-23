@@ -87,7 +87,7 @@
                 $lines: append($lines, $line);
             } @else {
                 $child: x--walk($value, $recursion-level + 1);
-                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $indent-spaces + 1)));
+                $lines: join($lines, set-nth($child, 1, $line + str-slice(nth($child, 1), $indent-spaces * ($recursion-level + 1) + 1)));
             }
         }
 
