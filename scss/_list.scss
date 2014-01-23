@@ -1,0 +1,24 @@
+// List
+//
+// Copyright (c) 2014 Whizark
+// @category list
+
+@import "variable";
+
+// Flattens list that includes nested list.
+// @function x-list-flatten
+// @param    $list     {List} The list to be flatten
+// @return             {List} The flattened list
+@function x-list-flatten($list) {
+    $flattened: ();
+
+    @each $item in $list {
+        @if x-is-list($item) {
+            $flattened: join($flattened, x-list-flatten($item));
+        } @else {
+            $flattened: append($flattened, $item);
+        }
+    }
+
+    @return $flattened;
+}

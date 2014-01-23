@@ -15,6 +15,7 @@ $x-modifier-separator: '-' !default;
 $x-strict-extend: false !default;
 
 @import "variable";
+@import "list";
 
 // Returns prefixed value(s) for selector
 // @function x-prefixer
@@ -37,24 +38,6 @@ $x-strict-extend: false !default;
 // @return              {List}      The list of selectors
 @function x-modifier($names...) {
     @return x-prefixer($x-modifier-separator, $names);
-}
-
-// Flattens list that includes nested list.
-// @function x-flatten
-// @param    $list     {List} The list to be flatten
-// @return             {List} The flattened list
-@function x-flatten($list) {
-    $flattened: ();
-
-    @each $item in $list {
-        @if x-is-list($item) {
-            $flattened: join($flattened, x-flatten($item));
-        } @else {
-            $flattened: join($flattened, $item);
-        }
-    }
-
-    @return $flattened;
 }
 
 // Defines module and produces ruleset(s) that use Placeholder selector
@@ -103,7 +86,7 @@ $x-strict-extend: false !default;
             }
 
             @each $name, $suffixes in $module {
-                $suffixes: x-flatten($suffixes);
+                $suffixes: x-list-flatten($suffixes);
 
                 & {
                     @if $x-strict-extend {
