@@ -11,10 +11,6 @@
 @function x-str-repeat($string, $times) {
     $repeated: '';
 
-    @if $times <= 0 {
-        @return $repeated;
-    }
-
     @for $i from 1 through $times {
         $repeated: $repeated + $string;
     }
