@@ -1,0 +1,22 @@
+// String
+//
+// Copyright (c) 2014 Whizark
+// @category string
+
+// Returns string repeated multiple times
+// @function x-str-repeat
+// @param    $string {String} The string to be repeated
+// @return           {String} Number of time the $string should be repeated
+@function x-str-repeat($string, $times) {
+    $repeated: '';
+
+    @if $times <= 0 {
+        @return $repeated;
+    }
+
+    @for $i from 1 through $times {
+        $result: $repeated + $string;
+    }
+
+    @return $repeated;
+}

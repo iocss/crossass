@@ -14,6 +14,8 @@ $x-modifier-separator: '-' !default;
 // `x-extend` mixin uses `!optional` if true
 $x-strict-extend: false !default;
 
+@import "variable";
+
 // Returns prefixed value(s) for selector
 // @function x-prefixer
 // @param    $prefix    {String}      The prefix to add
@@ -45,7 +47,7 @@ $x-strict-extend: false !default;
     $flattened: ();
 
     @each $item in $list {
-        @if type_of($item) == 'list' {
+        @if x-is-list($item) {
             $flattened: join($flattened, x-flatten($item));
         } @else {
             $flattened: join($flattened, $item);
@@ -94,7 +96,7 @@ $x-strict-extend: false !default;
 @mixin x-extend($modules...) {
     @at-root {
         @each $module in $modules {
-            @if type_of($module) != 'map' {
+            @if not x-is-map($module) {
                 $module: (
                     #{$module}: ()
                 )

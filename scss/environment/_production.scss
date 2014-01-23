@@ -1,0 +1,12 @@
+// Production Environment
+//
+// Copyright (c) 2014 Whizark
+// @category environment/production
+
+$x-environment: 'production';
+
+// Outputs variable-information for debug
+// @mixin x-debug
+// @param $variable {*} The variable to be debug
+@mixin x-debug($variable) {
+}

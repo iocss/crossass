@@ -1,0 +1,17 @@
+// Development Environment
+//
+// Copyright (c) 2014 Whizark
+// @category environment/development
+
+$x-environment: 'development';
+
+@import "../variable";
+
+// Outputs variable-information for debug
+// @mixin x-debug
+// @param $variable {*} The variable to be debug
+@mixin x-debug($variable) {
+    @each $line in x-inspect($variable) {
+        @debug $line;
+    }
+}
