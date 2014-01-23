@@ -15,7 +15,7 @@
     }
 
     @for $i from 1 through $times {
-        $result: $repeated + $string;
+        $repeated: $repeated + $string;
     }
 
     @return $repeated;
