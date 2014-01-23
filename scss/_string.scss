@@ -20,3 +20,25 @@
 
     @return $repeated;
 }
+
+// Splits string by a delimiter
+// @function x-str-split
+// @param    $string    {String} The string to be split
+// @param    $delimiter {String} The delimiter to split the string
+// @return              {List}   The List of the splitted strings
+@function x-str-split($string, $delimiter: ' ') {
+    $list: ();
+    $index: str-index($string, $delimiter);
+
+    @if $index == 0 {
+        $list: append($list, $string);
+    } @else {
+        $before: str-slice($string, 1, $index - 1);
+        $after: str-slice($string, $index + str-length($delimiter));
+
+        $list: append($list, $before);
+        $list: join($list, x-str-split($after, $delimiter));
+    }
+
+    @return $list;
+}
