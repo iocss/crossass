@@ -9,6 +9,7 @@ A Sass mixin / function library for modular CSS.
 * Module definition
 * Class exporting
 * Modifier support (also the nesting)
+* Parent ruleset inheritance
 * Multiple inheritance
 * Selectable extending
 * Selector Helper
@@ -318,6 +319,44 @@ CSS:
 }
 .module-alert-important {
     border-color: #f00;
+}
+```
+
+### Inheritance from parent ruleset
+
+You can easily extend parent ruleset by using `x-parent` mixin.
+
+SCSS:
+```scss
+@include x-module('alert', true) {
+  border-width: 1px;
+  border-style: solid;
+
+  @include x-modifier('important') {
+    @include x-parent();
+    border-color: #fa0;
+    font-weight: bold;
+
+    @include x-modifier('danger') {
+      @include x-parent();
+      border-color: #f00;
+    }
+  }
+}
+```
+
+CSS:
+```css
+.alert, .alert-important, .alert-important-danger {
+  border-width: 1px;
+  border-style: solid;
+}
+.alert-important, .alert-important-danger {
+  border-color: #fa0;
+  font-weight: bold;
+}
+.alert-important-danger {
+  border-color: #f00;
 }
 ```
 
