@@ -176,7 +176,7 @@ Where is the module variation's element `.nav--global__menu` ...?
 
 You should put the declarations for the element into `.nav__menu` together...?
 Although it might not be a big issue while the module variation's element is the same as the parent module's element,
-it will breaks up the principle of the modular CSS.
+it will break up the principle of the modular CSS.
 To extend parent module's elements, you hava to use `@extend` for the each elements.
 
 Crossass aims to be a Sass mixin / function library for easily building modular CSS.
