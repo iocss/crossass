@@ -10,7 +10,7 @@ A Sass mixin / function library for modular CSS.
 * Class exporting
 * Modifier support (also the nesting)
 * Modifier-level inheritance (from parent ruleset)
-* Module-level inheritance (from parent module, *including the modifiers!*)
+* Module-level inheritance (from parent module, **including the modifiers!**)
 * Multiple inheritance
 * Selectable inheritance
 * Selector Helper
