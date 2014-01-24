@@ -12,12 +12,169 @@ A Sass mixin / function library for modular CSS.
 * Multiple inheritance
 * Selectable extending
 * Selector Helper
-* [BEM](http://bem.info/) syntax support
+* BEM syntax support
 * Variable inspection (Crossass Inspector)
 
 ## Requirement
 
 * [Sass](http://sass-lang.com/) 3.3.0+
+
+## Background
+
+To build moudlar CSS, you know there are some popular methodologies like [OOCSS](http://oocss.org/) / [SMACSS](http://smacss.com/) / [BEM](http://bem.info/) etc.
+In [Sass](http://sass-lang.com/) 3.0.0+, we can build CSS using BEM syntax like the following.
+
+SCSS::
+```scss
+.nav {    // Module
+    @at-root {
+        & {
+            // ...
+        }
+        #{&}__menu {    // Module element
+            // ...
+        }
+        #{&}--global {    // Module variation
+            // ...
+        }
+    }
+}
+```
+
+CSS:
+```css
+.nav {
+    // ...
+}
+.nav__menu {
+    // ...
+}
+.nav--global {
+    // ...
+}
+```
+
+It looks like nice but you will find out there are still a few issues.
+For example, how can I add a child element into the module variation `.nav--global` ? Like this?
+
+SCSS:
+```scss
+.nav {    // Module
+    @at-root {
+        & {
+            // ...
+        }
+        #{&}__menu {    // Module element
+            // ...
+        }
+        #{&}--global {    // Module variation
+            // ...
+            #{&}__menu {    // Module variation's element (?)
+                // ...
+            }
+        }
+    }
+}
+```
+
+Actually, this works.
+
+CSS:
+```css
+.nav {
+    // ...
+}
+.nav__menu {
+    // ...
+}
+.nav--global {
+    // ...
+}
+.nav--global .nav--global__menu {
+    // ...
+}
+```
+
+However, it's bad for the eyes and it might also cause CSS specificity-related issue near the future for the `.nav--global .nav--global__menu`.
+
+By using `@at-root` and local variable, this issue can also be solved.
+
+SCSS:
+```scss
+.nav {    // Module
+    @at-root {
+        & {
+            // ...
+        }
+        #{&}__menu {    // Module element
+            // ...
+        }
+        #{&}--global {    // Module variation
+            $parent: #{&};
+            // ...
+
+            @at-root {
+                #{$parent}__menu {    // Module variation's element
+                    // ...
+                }
+            }
+        }
+    }
+}
+```
+
+CSS:
+```css
+.nav {
+    // ...
+}
+.nav__menu {
+    // ...
+}
+.nav--global {
+    // ...
+}
+.nav--global__menu {
+    // ...
+}
+```
+
+Although you can do this, the source code will get to be unreadable because of the nested module variation(s).
+
+As another solution, you might come up with using `@extend`.
+
+SCSS::
+```scss
+.nav {    // Module
+    @at-root {
+        & {
+            // ...
+        }
+        #{&}__menu {    // Module element
+            // ...
+        }
+    }
+}
+.nav--global {    // Module variation
+    @extend .nav;
+}
+```
+
+Unfortunately, this SCSS produces a sad result.
+
+CSS:
+```css
+.nav, .nav--global {
+    // ...
+}
+.nav__menu {
+    // ...
+}
+```
+
+Where is the child element of the module variation `.nav-global` ...?
+
+Crossass aims to be a Sass mixin / function library for easily building modular CSS.
 
 ##Usage
 
