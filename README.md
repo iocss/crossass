@@ -39,7 +39,7 @@ SCSS::
         #{&}__menu {    // Module element
             // ...
         }
-        #{&}--global {    // Module variation
+        #{&}--global {    // Module variant
             // ...
         }
     }
@@ -60,7 +60,7 @@ CSS:
 ```
 
 It looks like nice but you will find out there are still a few issues.
-For example, how can I add a child element into the module variation `.nav--global` ? Like this?
+For example, how can I add a child element into the module variant `.nav--global` ? Like this?
 
 SCSS:
 ```scss
@@ -72,9 +72,9 @@ SCSS:
         #{&}__menu {    // Module element
             // ...
         }
-        #{&}--global {    // Module variation
+        #{&}--global {    // Module variant
             // ...
-            #{&}__menu {    // Module variation's element (?)
+            #{&}__menu {    // Module variant's element (?)
                 // ...
             }
         }
@@ -114,10 +114,10 @@ SCSS:
         #{&}__menu {    // Module element
             // ...
         }
-        #{&}--global {    // Module variation
+        #{&}--global {    // Module variant
             // ...
             @at-root {
-                #{&}__menu {    // Module variation's element
+                #{&}__menu {    // Module variant's element
                     // ...
                 }
             }
@@ -143,7 +143,7 @@ CSS:
 ```
 
 Although you can do this, you have to repeatedly define the declarations for the elements
-and the source code will get to be unreadable because of the nested module variation(s).
+and the source code will get to be unreadable because of the nested module variant(s).
 
 As another solution, you might come up with using `@extend`.
 
@@ -159,7 +159,7 @@ SCSS::
         }
     }
 }
-.nav--global {    // Module variation
+.nav--global {    // Module variant
     @extend .nav;
 }
 ```
@@ -176,10 +176,10 @@ CSS:
 }
 ```
 
-Where is the module variation's element `.nav--global__menu` ...?
+Where is the module variant's element `.nav--global__menu` ...?
 
 You should put the declarations for the element into `.nav__menu` together...?
-Although it might not be a big issue while the module variation's element is the same as the parent module's element,
+Although it might not be a big issue while the module variant's element is the same as the parent module's element,
 it will break up the principle of the modular CSS.
 To extend parent module's elements, you hava to use `@extend` for the each elements.
 
