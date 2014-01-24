@@ -372,11 +372,11 @@ $x--contexts: (
             $suffixes: x-list-flatten($suffixes);
 
             & {
-                @include x--extend('%#{$name}');
-            }
+                @if x-is-empty($suffixes) {
+                    @include x--extend('%#{$name}');
+                }
 
-            @each $suffix in $suffixes {
-                #{&}#{$suffix} {
+                @each $suffix in $suffixes {
                     @include x--extend('%#{$name}#{$suffix}');
                 }
             }
