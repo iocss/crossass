@@ -29,7 +29,7 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-modifier
 // @param    $names         {String...} Modifier name(s)
 @mixin x-bem-modifier($names...) {
-    @at-root{
+    @at-root {
         @each $name in $names {
             $name: unquote($name);
 
@@ -52,7 +52,7 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-element
 // @param    $names        {String...} Element name(s)
 @mixin x-bem-element($names...) {
-    @at-root{
+    @at-root {
         @each $name in $names {
             $name: unquote($name);
 
