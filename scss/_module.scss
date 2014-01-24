@@ -149,7 +149,7 @@ $x--modules: ();
     @return not x-is-null(x-module--parent($name));
 }
 
-// Register new module
+// Registers new module
 // @function x-module--register
 // @private
 // @param    $name       {String} The module name
