@@ -220,6 +220,18 @@ $x--contexts: (
     @return map-has-key($x--modules, $name);
 }
 
+// Inherits declaration(s) from a ruleset
+// @mixin x--extend
+// @private
+// @param $selector {String} The selector having the ruleset
+@mixin x--extend($selector) {
+    @if $x-strict-extend {
+        @extend #{$selector};
+    } @else {
+        @extend #{$selector} !optional;
+    }
+}
+
 // Defines a base module and produces ruleset(s) that use Placeholder selector
 // @mixin x-module
 // @param $name      {String} The module name
@@ -304,11 +316,7 @@ $x--contexts: (
 // Inherits declaration(s) from the parent ruleset
 // @mixin x-parent
 @mixin x-parent() {
-    @if $x-strict-extend {
-        @extend #{x-module--context('parent')};
-    } @else {
-        @extend #{x-module--context('parent')} !optional;
-    }
+    @include x--extend(x-module--context('parent'));
 }
 
 // Inherits ruleset(s) from a module
@@ -327,20 +335,12 @@ $x--contexts: (
             $suffixes: x-list-flatten($suffixes);
 
             & {
-                @if $x-strict-extend {
-                    @extend %#{$name};
-                } @else {
-                    @extend %#{$name} !optional;
-                }
+                @include x--extend('%#{$name}');
             }
 
             @each $suffix in $suffixes {
                 #{&}#{$suffix} {
-                    @if $x-strict-extend {
-                        @extend %#{$name}#{$suffix};
-                    } @else {
-                        @extend %#{$name}#{$suffix} !optional;
-                    }
+                    @include x--extend('%#{$name}#{$suffix}');
                 }
             }
         }
