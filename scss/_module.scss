@@ -19,7 +19,7 @@ $x--modules: ();
 $x--contexts: (
     module: null,
     parent: null,
-    modifier: null
+    modifier: ()
 );
 
 @import "variable";
@@ -276,6 +276,8 @@ $x--contexts: (
 // @mixin x-modifier
 // @param $names     {String...} Modifier name(s)
 @mixin x-modifier($names...) {
+    $modifier-context: ();
+
     @at-root {
         @each $name in $names {
             $name: unquote($name);
@@ -284,7 +286,7 @@ $x--contexts: (
                 $suffix: x-modifier($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
                 $parent-context: x-module--context('parent', #{&});
-                $modifier-context: x-module--context('modifier', $modifier);
+                $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
                 @include x-inspect($parent-context);
                 @include x-inspect($modifier-context);
                 @include x-inspect($modifier);

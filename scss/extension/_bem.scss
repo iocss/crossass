@@ -29,6 +29,8 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-modifier
 // @param    $names         {String...} Modifier name(s)
 @mixin x-bem-modifier($names...) {
+    $modifier-context: ();
+
     @at-root {
         @each $name in $names {
             $name: unquote($name);
@@ -37,7 +39,7 @@ $x-bem-element-separator: '__' !default;
                 $suffix: x-bem-modifier($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
                 $parent-context: x-module--context('parent', #{&});
-                $modifier-context: x-module--context('modifier', $modifier);
+                $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
                 @include x-inspect($parent-context);
                 @include x-inspect($modifier-context);
                 @include x-inspect($modifier);
@@ -56,6 +58,8 @@ $x-bem-element-separator: '__' !default;
 // @mixin    x-bem-element
 // @param    $names        {String...} Element name(s)
 @mixin x-bem-element($names...) {
+    $modifier-context: ();
+
     @at-root {
         @each $name in $names {
             $name: unquote($name);
@@ -64,7 +68,7 @@ $x-bem-element-separator: '__' !default;
                 $suffix: x-bem-element($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
                 $parent-context: x-module--context('parent', #{&});
-                $modifier-context: x-module--context('modifier', $modifier);
+                $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
                 @include x-inspect($parent-context);
                 @include x-inspect($modifier-context);
                 @include x-inspect($modifier);
