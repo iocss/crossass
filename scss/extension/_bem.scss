@@ -34,8 +34,12 @@ $x-bem-element-separator: '__' !default;
             $name: unquote($name);
 
             @if x--is-modifiable(#{&}) {
-                $suffix: #{x-bem-modifier($name)};
-                $modifier: x-module--add-modifier(x-module--context(), $suffix);
+                $suffix: x-bem-modifier($name);
+                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $parent-context: x-module--context('parent', #{&});
+                $modifier-context: x-module--context('modifier', $modifier);
+                @include x-inspect($parent-context);
+                @include x-inspect($modifier-context);
                 @include x-inspect($modifier);
 
                 #{&}#{$suffix} {
@@ -57,8 +61,12 @@ $x-bem-element-separator: '__' !default;
             $name: unquote($name);
 
             @if x--is-modifiable(#{&}) {
-                $suffix: #{x-bem-element($name)};
-                $modifier: x-module--add-modifier(x-module--context(), $suffix);
+                $suffix: x-bem-element($name);
+                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $parent-context: x-module--context('parent', #{&});
+                $modifier-context: x-module--context('modifier', $modifier);
+                @include x-inspect($parent-context);
+                @include x-inspect($modifier-context);
                 @include x-inspect($modifier);
 
                 #{&}#{$suffix} {

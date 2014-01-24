@@ -15,8 +15,12 @@ $x-strict-extend: false !default;
 // The module storage to be used for storing module information
 $x--modules: ();
 
-// The module name in the current context.
-$x--context: null;
+// The context storage to be used for storing the current context
+$x--contexts: (
+    module: null,
+    parent: null,
+    modifier: null
+);
 
 @import "variable";
 @import "list";
@@ -109,12 +113,20 @@ $x--context: null;
     @return $attributes;
 }
 
-// Returns the module name in the current context
+// Returns or sets the context of a context type
 // @function x-module--context
 // @private
-// @return  {String} The module name
-@function x-module--context() {
-    @return $x--context;
+// @param   $type    {*}      The type of the context
+// @param   $context {*}      The context to be set as the context type
+// @return           {String} The context of the type
+@function x-module--context($type, $context: null) {
+    @if x-is-null($context) {
+        $context: map-get($x--contexts, $type);
+    } @else {
+        $x--contexts: map-merge($x--contexts, ($type: $context)) !global;
+    }
+
+    @return $context;
 }
 
 // Returns or sets a module attribute
@@ -195,7 +207,7 @@ $x--context: null;
     $attributes: map-merge(x-module--default-attrs(), $attributes);
 
     $module: x-module--module($name, $attributes);
-    $x--context: $name !global;
+    $context: x-module--context('module', $name);
 
     @return $module;
 }
@@ -270,7 +282,11 @@ $x--context: null;
 
             @if x--is-modifiable(#{&}) {
                 $suffix: x-modifier($name);
-                $modifier: x-module--add-modifier(x-module--context(), #{$suffix});
+                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $parent-context: x-module--context('parent', #{&});
+                $modifier-context: x-module--context('modifier', $modifier);
+                @include x-inspect($parent-context);
+                @include x-inspect($modifier-context);
                 @include x-inspect($modifier);
 
                 #{&}#{$suffix} {
