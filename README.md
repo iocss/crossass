@@ -97,7 +97,7 @@ CSS:
 
 However, it's bad for the eyes and it might also cause CSS specificity-related issue near the future for the `.nav--global .nav--global__menu`.
 
-By using `@at-root` and local variable, this issue can also be solved.
+By using `@at-root` inside the child selector, this issue can also be solved.
 
 SCSS:
 ```scss
@@ -110,11 +110,9 @@ SCSS:
             // ...
         }
         #{&}--global {    // Module variation
-            $parent: #{&};
             // ...
-
             @at-root {
-                #{$parent}__menu {    // Module variation's element
+                #{&}__menu {    // Module variation's element
                     // ...
                 }
             }
