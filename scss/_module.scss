@@ -244,8 +244,6 @@ $x--contexts: (
         )
     );
 
-    @include x-inspect($x--modules);
-
     %#{$name} {
         @content;
     }
@@ -270,8 +268,6 @@ $x--contexts: (
     );
     $parent-module: x-module--parent($parent);
     $parent-modifiers: x-module--attr($parent, 'modifiers');
-
-    @include x-inspect($x--modules);
 
     %#{$name} {
         @include x--extend('%#{$parent}');
@@ -343,9 +339,6 @@ $x--contexts: (
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
                 $parent-context: x-module--context('parent', #{&});
                 $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
-                @include x-inspect($parent-context);
-                @include x-inspect($modifier-context);
-                @include x-inspect($modifier);
 
                 #{&}#{$suffix} {
                     @content;
