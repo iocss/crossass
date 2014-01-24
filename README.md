@@ -16,8 +16,11 @@ A Sass mixin / function library for modular CSS.
 * BEM syntax support
 * Variable inspection (Crossass Inspector)
 * Automatic `@extend` of parent module's children (in progress)
+* No dependencies except for Sass
 
 ## Requirement
+
+Crossass is a pure Sass mixin / function library, so really portable.
 
 * [Sass](http://sass-lang.com/) 3.3.0+
 
