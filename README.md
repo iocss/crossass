@@ -10,12 +10,12 @@ A Sass mixin / function library for modular CSS.
 * Class exporting
 * Modifier support (also the nesting)
 * Parent ruleset inheritance
+* Parent module inheritance (including the modifiers!)
 * Multiple inheritance
 * Selectable extending
 * Selector Helper
 * BEM syntax support
 * Variable inspection (Crossass Inspector)
-* Automatic `@extend` of parent module's children (in progress)
 * No dependencies except for Sass
 
 ## Requirement
@@ -245,6 +245,8 @@ CSS:
 }
 ```
 
+Note that the class exporting at the module definition produces redundant rulesets for now.
+
 ### Modifier
 
 `x-modifier` mixin generates a suffixed selector.
@@ -362,6 +364,42 @@ CSS:
   border-color: #f00;
 }
 ```
+
+### Sub Module (Module-level extending)
+
+By using `x-module-extend` mixin, you can define sub module based on another module.
+The sub module inherits parent module's rulesets including the modifiers!
+
+SCSS:
+```scss
+@include x-module('parent', true) {
+  border: 1px solid #000;
+
+  @include x-modifier('modifier') {
+    background: #fff;
+  }
+}
+@include x-module-extend('child', 'parent', true) {
+}
+```
+
+CSS:
+```css
+.child {
+    border: 1px solid #000;
+}
+.child-modifier {
+    background: #fff;
+}
+.parent {
+    border: 1px solid #000;
+}
+.parent-modifier {
+    background: #fff;
+}
+```
+
+Note that the class exporting at the module definition produces redundant rulesets for now.
 
 ### Extending
 

@@ -270,15 +270,37 @@ $x--contexts: (
             parent: $parent
         )
     );
+    $parent-module: x-module--parent($parent);
+    $parent-modifiers: x-module--attr($parent, 'modifiers');
 
     @include x-inspect($x--modules);
 
     %#{$name} {
+        @include x--extend('%#{$parent}');
+
+        @at-root {
+            @each $parent-modifier in $parent-modifiers {
+                #{&}#{$parent-modifier} {
+                    @include x--extend('%#{$parent}#{$parent-modifier}');
+                }
+            }
+        }
+
         @content;
     }
 
     @if $exporting {
         .#{$name} {
+            @include x--extend('%#{$parent}');
+
+            @at-root {
+                @each $parent-modifier in $parent-modifiers {
+                    .#{$name}#{$parent-modifier} {
+                        @include x--extend('%#{$parent}#{$parent-modifier}');
+                    }
+                }
+            }
+
             @content;
         }
     }
