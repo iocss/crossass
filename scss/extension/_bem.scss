@@ -34,7 +34,11 @@ $x-bem-element-separator: '__' !default;
             $name: unquote($name);
 
             @if x--is-modifiable(#{&}) {
-                #{&}#{x-bem-modifier($name)} {
+                $suffix: #{x-bem-modifier($name)};
+                $modifier: x-module--add-modifier(x-module--context(), $suffix);
+                @include x-inspect($modifier);
+
+                #{&}#{$suffix} {
                     @content;
                 }
             } @else {
@@ -53,7 +57,11 @@ $x-bem-element-separator: '__' !default;
             $name: unquote($name);
 
             @if x--is-modifiable(#{&}) {
-                #{&}#{x-bem-element($name)} {
+                $suffix: #{x-bem-element($name)};
+                $modifier: x-module--add-modifier(x-module--context(), $suffix);
+                @include x-inspect($modifier);
+
+                #{&}#{$suffix} {
                     @content;
                 }
             } @else {

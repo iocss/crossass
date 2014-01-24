@@ -15,6 +15,9 @@ $x-strict-extend: false !default;
 // The module storage to be used for storing module information
 $x--modules: ();
 
+// The module name in the current context.
+$x--context: null;
+
 @import "variable";
 @import "list";
 @import "selector";
@@ -75,7 +78,8 @@ $x--modules: ();
 @function x-module--default-attrs() {
     $defaults: (
         name: null,
-        parent: null
+        parent: null,
+        modifiers: ()
     );
 
     @return $defaults;
@@ -105,6 +109,14 @@ $x--modules: ();
     @return $attributes;
 }
 
+// Returns the module name in the current context
+// @function x-module--context
+// @private
+// @return  {String} The module name
+@function x-module--context() {
+    @return $x--context;
+}
+
 // Returns or sets a module attribute
 // @function x-module--attr
 // @private
@@ -126,6 +138,25 @@ $x--modules: ();
     }
 
     @return $value;
+}
+
+// Registers new modifier for a module
+// @function x-module--add-modifier
+// @private
+// @param    $name     {String} The module name
+// @param    $modifier {String} The modifier to be registered to the module
+// @return             {String} The modifier
+@function x-module--add-modifier($name, $modifier) {
+    $modifiers: x-module--attr($name, 'modifiers');
+
+    @if x-list-has($modifiers, $modifier) {
+        @return $modifier;
+    }
+
+    $modifiers: join($modifiers, $modifier);
+    $modifiers: x-module--attr($name, 'modifiers', $modifiers);
+
+    @return $modifier;
 }
 
 // Returns parent module attributes
@@ -164,6 +195,7 @@ $x--modules: ();
     $attributes: map-merge(x-module--default-attrs(), $attributes);
 
     $module: x-module--module($name, $attributes);
+    $x--context: $name !global;
 
     @return $module;
 }
@@ -237,7 +269,11 @@ $x--modules: ();
             $name: unquote($name);
 
             @if x--is-modifiable(#{&}) {
-                #{&}#{x-modifier($name)} {
+                $suffix: x-modifier($name);
+                $modifier: x-module--add-modifier(x-module--context(), #{$suffix});
+                @include x-inspect($modifier);
+
+                #{&}#{$suffix} {
                     @content;
                 }
             } @else {
