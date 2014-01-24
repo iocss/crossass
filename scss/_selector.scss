@@ -3,11 +3,11 @@
 // Copyright (c) 2014 Whizark
 // @category selector
 
-// Returns whether a selector is modifier
-// @function x-selector-is-modifier
+// Returns whether a selector is a single class selecotr or placeholder
+// @function x-selector-is-single
 // @param    $selector {String} The selector to be test
-// @return             {Bool}   True if the selector is modifier, otherwise false
-@function x-selector-is-modifier($selector) {
+// @return             {Bool}   True if the selector is the single selector, otherwise false
+@function x-selector-is-single($selector) {
     @if str-index($selector, ' ') != 0 {
         @return false;
     }
@@ -20,9 +20,11 @@
         @return false;
     }
 
-    $is-combinator: str-index(str-slice($selector, 2), '.') != 0;
-    $is-placeholder: str-index($selector, '%') == 1;
+    $sliced: str-slice($selector, 2);
+    $is-combinator: str-index($sliced, '.') != 0;
+    $is-combinator: $is-combinator or (str-index($sliced, '%') != 0);
     $is-class: str-index($selector, '.') == 1;
+    $is-placeholder: str-index($selector, '%') == 1;
 
     @return not $is-combinator and ($is-placeholder or $is-class);
 }

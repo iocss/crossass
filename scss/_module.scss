@@ -17,6 +17,7 @@ $x--modules: ();
 
 @import "variable";
 @import "list";
+@import "selector";
 
 // Returns prefixed value(s) for selector
 // @function x-prefixer
@@ -209,8 +210,12 @@ $x--modules: ();
         @each $name in $names {
             $name: unquote($name);
 
-            #{&}#{x-modifier($name)} {
-                @content;
+            @if x-selector-is-single(#{&}) {
+                #{&}#{x-modifier($name)} {
+                    @content;
+                }
+            } @else {
+                @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
             }
         }
     }
