@@ -302,7 +302,11 @@ $x--contexts: (
 // Inherits declaration(s) from the parent ruleset
 // @mixin x-parent
 @mixin x-parent() {
-    @extend #{x-module--context('parent')};
+    @if $x-strict-extend {
+        @extend #{x-module--context('parent')};
+    } @else {
+        @extend #{x-module--context('parent')} !optional;
+    }
 }
 
 // Inherits ruleset(s) from a module
