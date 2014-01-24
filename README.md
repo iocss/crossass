@@ -245,7 +245,30 @@ CSS:
 }
 ```
 
-Note that the class exporting at the module definition produces redundant rulesets for now.
+### Exporting
+
+You may use `x-export` mixin to export a module.
+
+SCSS:
+```scss
+@include x-module('module') {
+  border: 1px solid #000;
+  strong {
+    color: #f00;
+  }
+}
+@include x-export('module');
+```
+
+CSS:
+```css
+.module {
+    border: 1px solid #f00;
+}
+.module strong {
+    color: #f00;
+}
+```
 
 ### Modifier
 
@@ -398,8 +421,6 @@ CSS:
     background: #fff;
 }
 ```
-
-Note that the class exporting at the module definition produces redundant rulesets for now.
 
 ### Extending
 
