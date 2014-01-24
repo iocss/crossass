@@ -42,6 +42,32 @@ $x--modules: ();
     @return x-prefixer($x-modifier-separator, $names);
 }
 
+// Returns whether a selector is a single class selecotr or placeholder
+// @function x--is-modifiable
+// @private
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector is the single selector, otherwise false
+@function x--is-modifiable($selector) {
+    $sliced: str-slice($selector, 2);
+
+    $maybe-not-modifiable: x-selector-has-universal($sliced) or
+                           x-selector-has-id($sliced) or
+                           x-selector-has-class($sliced) or
+                           x-selector-has-attr($sliced) or
+                           x-selector-has-combinator($sliced) or
+                           x-selector-has-subject($sliced) or
+                           x-selector-has-placeholder($sliced);
+
+    @if $maybe-not-modifiable {
+        @return false;
+    }
+
+    $is-class: str-index($selector, '.') == 1;
+    $is-placeholder: str-index($selector, '%') == 1;
+
+    @return $is-class or $is-placeholder;
+}
+
 // Returns the default attributes for module
 // @function x-module--default-attrs
 // @private
@@ -210,7 +236,7 @@ $x--modules: ();
         @each $name in $names {
             $name: unquote($name);
 
-            @if x-selector-is-single(#{&}) {
+            @if x--is-modifiable(#{&}) {
                 #{&}#{x-modifier($name)} {
                     @content;
                 }

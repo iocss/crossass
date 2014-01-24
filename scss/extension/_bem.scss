@@ -33,7 +33,7 @@ $x-bem-element-separator: '__' !default;
         @each $name in $names {
             $name: unquote($name);
 
-            @if x-selector-is-single(#{&}) {
+            @if x--is-modifiable(#{&}) {
                 #{&}#{x-bem-modifier($name)} {
                     @content;
                 }
@@ -52,7 +52,7 @@ $x-bem-element-separator: '__' !default;
         @each $name in $names {
             $name: unquote($name);
 
-            @if x-selector-is-single(#{&}) {
+            @if x--is-modifiable(#{&}) {
                 #{&}#{x-bem-element($name)} {
                     @content;
                 }

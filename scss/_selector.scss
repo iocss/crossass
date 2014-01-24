@@ -136,29 +136,3 @@
 @function x-selector-has-placeholder($selector) {
     @return str-index($selector, '%') != 0;
 }
-
-// Returns whether a selector is a single class selecotr or placeholder
-// @function x-selector-is-single
-// @param    $selector {String} The selector to be test
-// @return             {Bool}   True if the selector is the single selector, otherwise false
-@function x-selector-is-single($selector) {
-    @if str-index($selector, ' ') != 0 {
-        @return false;
-    }
-
-    @if str-index($selector, '[') != 0 {
-        @return false;
-    }
-
-    @if str-index($selector, ':') != 0 {
-        @return false;
-    }
-
-    $sliced: str-slice($selector, 2);
-    $is-combinator: str-index($sliced, '.') != 0;
-    $is-combinator: $is-combinator or (str-index($sliced, '%') != 0);
-    $is-class: str-index($selector, '.') == 1;
-    $is-placeholder: str-index($selector, '%') == 1;
-
-    @return not $is-combinator and ($is-placeholder or $is-class);
-}
