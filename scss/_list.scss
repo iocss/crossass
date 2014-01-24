@@ -7,8 +7,8 @@
 
 // Flattens list that includes nested list
 // @function x-list-flatten
-// @param    $list     {List} The list to be flatten
-// @return             {List} The flattened list
+// @param    $list {List} The list to be flatten
+// @return         {List} The flattened list
 @function x-list-flatten($list) {
     $flattened: ();
 
