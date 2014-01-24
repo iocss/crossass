@@ -3,6 +3,140 @@
 // Copyright (c) 2014 Whizark
 // @category selector
 
+// Returns whether a selector MAYBE has an universal selecotr
+// @function x-selector-has-universal
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-universal($selector) {
+    @return str-index($selector, '*') != 0;
+}
+
+// Returns whether a selector MAYBE has a ID selecotr
+// @function x-selector-has-id
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-id($selector) {
+    @return str-index($selector, '#') != 0;
+}
+
+// Returns whether a selector MAYBE has a class selecotr
+// @function x-selector-has-class
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-class($selector) {
+    @return str-index($selector, '.') != 0;
+}
+
+// Returns whether a selector MAYBE has an attribute selecotr
+// @function x-selector-has-attr
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-attr($selector) {
+    @return str-index($selector, '[') != 0 and str-index($selector, ']') != 0;
+}
+
+// Returns whether a selector MAYBE has a pseudo-class selecotr
+// @function x-selector-has-pseudo-class
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-pseudo-class($selector) {
+    @return str-index($selector, ':') != 0 or
+            str-index($selector, '||') != 0;
+}
+
+// Returns whether a selector MAYBE has a pseudo-element selecotr
+// @function x-selector-has-pseudo-element
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-pseudo-element($selector) {
+    @return str-index($selector, '::') != 0;
+}
+
+// Returns whether a selector MAYBE has a pseudo-class/pseudo-element selecotr
+// @function x-selector-has-pseudo
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the selector, otherwise false
+@function x-selector-has-pseudo($selector) {
+    @return x-selector-has-pseudo-class($selector) or
+            x-selector-has-pseudo-element($selector);
+}
+
+// Returns whether a selector MAYBE has a descendant combinator
+// @function x-selector-has-descendant
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-descendant($selector) {
+    @return str-index($selector, ' ') != 0;
+}
+
+// Returns whether a selector MAYBE has a child combinator
+// @function x-selector-has-child
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-child($selector) {
+    @return str-index($selector, '>') != 0;
+}
+
+// Returns whether a selector MAYBE has a next-sibling combinator
+// @function x-selector-has-next-sibling
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-next-sibling($selector) {
+    @return str-index($selector, '+') != 0;
+}
+
+// Returns whether a selector MAYBE has a following-sibling combinator
+// @function x-selector-has-following-sibling
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-following-sibling($selector) {
+    @return str-index($selector, '~') != 0;
+}
+
+// Returns whether a selector MAYBE has a sibling combinator
+// @function x-selector-has-sibling
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-sibling($selector) {
+    @return x-selector-has-next-sibling($selector) or
+            x-selector-has-following-sibling($selector);
+}
+
+// Returns whether a selector MAYBE has a reference combinator
+// @function x-selector-has-reference
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has the combinator, otherwise false
+@function x-selector-has-reference($selector) {
+    @return str-index($selector, '/') != 0;
+}
+
+// Returns whether a selector MAYBE has a combinator
+// @function x-selector-has-combinator
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has a combinator, otherwise false
+@function x-selector-has-combinator($selector) {
+    @return x-selector-has-descendant($selector) or
+            x-selector-has-child($selector) or
+            x-selector-has-sibling($selector) or
+            x-selector-has-reference($selector);
+}
+
+// Returns whether a selector MAYBE has a subject indicator
+// @function x-selector-has-subject
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has a subject indicator, otherwise false
+@function x-selector-has-subject($selector) {
+    @return str-index($selector, '!') != 0;
+}
+
+// Returns whether a selector MAYBE has a placeholder
+// @function x-selector-has-placeholder
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector maybe has a placeholder, otherwise false
+@function x-selector-has-placeholder($selector) {
+    @return str-index($selector, '%') != 0;
+}
+
 // Returns whether a selector is a single class selecotr or placeholder
 // @function x-selector-is-single
 // @param    $selector {String} The selector to be test
