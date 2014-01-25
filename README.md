@@ -73,8 +73,8 @@ SCSS::
     @include x-modifier( 'header' ) {
         // Selectable and Multiple extending
         @include x-extend( (
-            block: (                                 // From 'block' module,
-                x-modifier( 'header', 'colored' )    // inheriting 'header' and 'colored'
+            block: (                              // From 'block' module,
+                x-modifier( 'header', 'colored' ) // inheriting 'header' and 'colored'
             )
         ) );
 
