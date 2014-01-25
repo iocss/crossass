@@ -48,7 +48,7 @@ SCSS::
     @include x-modifier( 'colored' ) {
         background: #ccc;
 
-        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifiers
+        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifier
             color: #fff;
             background: #888;
         }
