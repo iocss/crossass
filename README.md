@@ -20,11 +20,11 @@ A Sass mixin / function library for modular CSS.
 
 ## Roadmap
 
-# Add public API to get Module name, parent, modifiers.
-# Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
-# Make x-extend() mixin to be more flexible, robust.
-# Almost done all I want to.
-# Use more, test more.
+1. Add public API to get Module name, parent, modifiers.
+2. Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
+3. Make x-extend() mixin to be more flexible, robust.
+4. Almost done all I want to.
+5. Use more, test more.
 
 ## Summary
 
