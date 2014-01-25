@@ -21,11 +21,12 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 ## Roadmap
 
 1. Add public API to get Module ~~name, parent,~~ modifiers(?).
-2. Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
-3. Make x-extend() mixin to be more flexible, robust.
-4. Almost done all I want to.
-5. Use more, test more.
-
+2. Add public API to get parent & current modifers(?).
+3. Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
+4. Make x-extend() mixin to be more flexible, robust.
+5. Almost done all I want to.
+6. Live Template for IntelliJ IDEA family (PhpStorm, WebStorm etc.) I use, maybe.
+7. Use more, test more.
 
 ## Summary
 
