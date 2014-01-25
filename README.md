@@ -24,6 +24,142 @@ Crossass is a pure Sass mixin / function library, so really portable.
 
 * [Sass](http://sass-lang.com/) 3.3.0+
 
+## Summary
+
+With Crossass, you can build modular CSS as below!
+
+SCSS::
+```scss
+// This is an example using the full features of Crossass.
+
+// Module definition withough exporting rulesets (Placeholder definition)
+@include x-module( 'block' ) {
+    border: 0 solid #aaa;
+
+    // Element definition using Modifier
+    @include x-modifier( 'header', 'footer' ) {    // Multiple definitions at once
+        @include x-parent();    // Modifier-level inheritance (from the parent ruleset)
+
+        padding: .5em;
+        border-width: 1px;
+    }
+
+    @include x-modifier( 'colored' ) {
+        background: #ccc;
+
+        @include x-modifier( 'dark' ) {    // Nested Modifier for parent modifiers
+            color: #fff;
+            background: #888;
+        }
+    }
+
+    @include x-modifier( 'body' ) {   // Modifier produces selector(s) like `%block-body`
+        @include x-parent();
+
+        padding: .5em;
+        border-right-width: 1px;
+        border-left-width: 1px;
+    }
+}
+@include x-export( 'block' );    // Exporting as class selectors
+
+// 'fancy-block' module
+@include x-module( 'fancy-block', true ) {    // Exporting with the module definition
+    border: 4px solid #aaa;
+    border-radius: 16px;
+    overflow: hidden;
+
+    // Partial overriding inherited property
+    @include x-modifier( 'header' ) {
+        // Selectable and Multiple extending
+        @include x-extend( (
+            block: (                                 // From 'block' module,
+                x-modifier( 'header', 'colored' )    // inheriting 'header' and 'colored'
+            )
+        ) );
+
+        // Overriding inherited properties
+        border: none;
+    }
+
+    @include x-modifier('footer') {
+        @include x-extend( (
+            block: (
+                x-modifier( 'footer', 'colored' )
+            )
+        ) );
+
+        border: none;
+    }
+
+    @include x-modifier('body') {
+        @include x-extend('block-body');    // extends `%block-body` like `@extend`
+
+        border: none;
+    }
+}
+
+// 'alert' module extends 'fancy-block' module
+@include x-module-extend('alert', 'fancy-block', true) {
+    // Automatic Module-level inheritance, including the parent modifiers!
+
+    border-color: #f66;
+
+    @include x-modifier('header', 'footer') {
+        background: #faa;
+    }
+}
+```
+
+Compiling it with Sass, you can get the clean output.
+
+```css
+.block-header, .fancy-block-header, .alert-header, .block-footer, .fancy-block-footer, .alert-footer, .block-body, .fancy-block-body, .alert-body, .block {
+  border: 0 solid #aaa;
+}
+.block-header, .fancy-block-header, .alert-header {
+  padding: .5em;
+  border-width: 1px;
+}
+.block-footer, .fancy-block-footer, .alert-footer {
+  padding: .5em;
+  border-width: 1px;
+}
+.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer {
+  background: #ccc;
+}
+.block-body, .fancy-block-body, .alert-body {
+  padding: .5em;
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+.fancy-block, .alert {
+  border: 4px solid #aaa;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.fancy-block-header, .alert-header {
+  border: none;
+}
+.fancy-block-footer, .alert-footer {
+  border: none;
+}
+.fancy-block-body, .alert-body {
+  border: none;
+}
+
+.alert {
+  border-color: #f66;
+}
+.alert-header {
+  background: #faa;
+}
+.alert-footer {
+  background: #faa;
+}
+```
+
 ## Background
 
 To build moudlar CSS, you know there are some popular methodologies like [OOCSS](http://oocss.org/) / [SMACSS](http://smacss.com/) / [BEM](http://bem.info/) etc.
