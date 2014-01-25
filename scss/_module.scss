@@ -49,6 +49,15 @@ $x--contexts: (
     @return x-prefixer($x-modifier-separator, $names);
 }
 
+// Returns the module-root selector
+// @function x-root
+// @return   {String} The selector
+@function x-root() {
+    $module: x-module--context('module');
+
+    @return '%#{$module}';
+}
+
 // Returns whether a selector is a single class selecotr or placeholder
 // @function x--is-modifiable
 // @private

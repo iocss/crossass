@@ -111,6 +111,15 @@ SCSS:
     @include x-modifier('header', 'footer') {
         background: #faa;
     }
+
+    @include x-modifier('body') {
+        &::before {
+            // Referencing Module-root selector by `x-root()` function
+            // `This is an element of '%alert'.`
+            content: "This is an element of '#{x-root()}'.";
+            display: block;
+        }
+    }
 }
 ```
 
@@ -161,6 +170,10 @@ CSS:
 }
 .alert-footer {
   background: #faa;
+}
+.alert-body::before {
+  content: "This is an element of '%alert'.";
+  display: block;
 }
 ```
 
