@@ -194,12 +194,12 @@ SCSS:
     }
 }
 
-// 'wysiwyg-block' module extends 'block' module
+// 'block-editable' module extends 'block' module
 @include x-module-extend( 'block-editable', 'block' ) {
     margin: 1em;
 }
 
-// Exporting a module with a namespace-scoped ruleset
+// Exporting a module as namespace-scoped rulesets
 @include x-export( 'block-editable', 'wysiwyg' );
 ```
 
