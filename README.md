@@ -34,8 +34,74 @@ With Crossass, you can build modular CSS as below!
 
 SCSS:
 ```scss
-// This is an example using the full features of Crossass.
+// Module definition
+@include x-module( 'block' ) {
+    border: 1px solid #aaa;
 
+    // Element definition using Modifier
+    @include x-modifier( 'header', 'footer' ) {  // Multiple definitions at once
+        padding: .5em;
+        background: #ccc;
+    }
+
+    // Modifier produces `%<module name>-<modifier name>` selector(s)
+    // `%block-body` in this context
+    @include x-modifier( 'body' ) {
+        padding: .5em;
+    }
+}
+
+// 'alert' module extends 'fancy-block' module
+// wtth exporting as class selectors
+@include x-module-extend( 'fancy-block', 'block', true ) {
+    // Automatic Module-level inheritance, including the parent Module's Modifiers!
+
+    // Partial overriding inherited properties from parent Module's root
+    border-color: #f66;
+    border-radius: 16px;
+    overflow: hidden;
+
+    // Overriding inherited Modifiers from parent Module's Modifiers
+    @include x-modifier( 'header', 'footer' ) {
+        background: #faa;
+    }
+}
+```
+
+CSS:
+```css
+.fancy-block {
+  border: 1px solid #aaa;
+}
+.fancy-block-header {
+  padding: .5em;
+  background: #ccc;
+}
+.fancy-block-footer {
+  padding: .5em;
+  background: #ccc;
+}
+.fancy-block-body {
+  padding: .5em;
+}
+
+.fancy-block {
+  border-color: #f66;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.fancy-block-header {
+  background: #faa;
+}
+.fancy-block-footer {
+  background: #faa;
+}
+```
+
+The following is another example using almost all of the features.
+
+SCSS:
+```scss
 // Module definition without exporting rulesets (Placeholder definition)
 @include x-module( 'block' ) {
     border: 0 solid #aaa;
@@ -43,6 +109,7 @@ SCSS:
     // Element definition using Modifier
     @include x-modifier( 'header', 'footer' ) {  // Multiple definitions at once
         // Modifier-level inheritance (from the parent ruleset)
+        // Inheritting `%block` in this context
         @include x-parent();
 
         padding: .5em;
@@ -52,13 +119,14 @@ SCSS:
     @include x-modifier( 'colored' ) {
         background: #ccc;
 
-        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifier(s)
+        @include x-modifier( 'dark' ) {  // Nested Modifier for parent Modifier(s)
             color: #fff;
             background: #888;
         }
     }
 
-    // Modifier produces selector(s) like `%block-body`
+    // Modifier produces `%<module name>-<modifier name>` selector(s)
+    // `%block-body` in this context
     @include x-modifier( 'body' ) {
         @include x-parent();
 
@@ -83,7 +151,7 @@ SCSS:
             )
         ) );
 
-        // Partial overriding inherited property
+        // Partial overriding inherited property above
         border: none;
     }
 
@@ -98,7 +166,7 @@ SCSS:
     }
 
     @include x-modifier('body') {
-        @include x-extend('block-body');    // Extending `%block-body` like `@extend`
+        @include x-extend('block-body');  // Extending `%block-body` like `@extend`
 
         border: none;
     }
@@ -106,10 +174,12 @@ SCSS:
 
 // 'alert' module extends 'fancy-block' module
 @include x-module-extend('alert', 'fancy-block', true) {
-    // Automatic Module-level inheritance, including the parent modifiers!
+    // Automatic Module-level inheritance, including the parent Module's Modifiers!
 
+    // Partial overriding inherited properties from parent Module's root
     border-color: #f66;
 
+    // Overriding inherited Modifiers from parent Module's Modifiers
     @include x-modifier('header', 'footer') {
         background: #faa;
     }
