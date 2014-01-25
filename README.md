@@ -32,7 +32,7 @@ SCSS:
 ```scss
 // This is an example using the full features of Crossass.
 
-// Module definition withough exporting rulesets (Placeholder definition)
+// Module definition without exporting rulesets (Placeholder definition)
 @include x-module( 'block' ) {
     border: 0 solid #aaa;
 
@@ -63,7 +63,7 @@ SCSS:
         border-left-width: 1px;
     }
 }
-@include x-export( 'block' );    // Exporting as class selectors
+@include x-export( 'block' );    // Exporting a module as class selectors
 
 // 'fancy-block' module
 @include x-module( 'fancy-block', true ) { // Exporting with the module definition
