@@ -20,7 +20,7 @@ $x-inspector-indent-size: 4 !default;
 // @private
 // @param    $variable        {*}      The variable to be walked
 // @param    $recursion-level {Number} The level of the recursive call (internally used)
-// @return                  the   {List}   The list of lines that include variable-information
+// @return                    {List}   The list of lines that include variable-information
 @function x-inspector--walk($variable, $recursion-level: 0) {
     $lines: ();
     $indent: x-str-repeat(' ', $recursion-level * $x-inspector-indent-size);
