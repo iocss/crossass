@@ -28,7 +28,7 @@ Crossass is a pure Sass mixin / function library, so really portable.
 
 With Crossass, you can build modular CSS as below!
 
-SCSS::
+SCSS:
 ```scss
 // This is an example using the full features of Crossass.
 
@@ -48,7 +48,7 @@ SCSS::
     @include x-modifier( 'colored' ) {
         background: #ccc;
 
-        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifier
+        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifier(s)
             color: #fff;
             background: #888;
         }
@@ -71,16 +71,15 @@ SCSS::
     border-radius: 16px;
     overflow: hidden;
 
-    // Partial overriding inherited property
     @include x-modifier( 'header' ) {
         // Selectable and Multiple extending
         @include x-extend( (
             block: (                              // From 'block' module,
-                x-modifier( 'header', 'colored' ) // inheriting 'header' and 'colored'
+                x-modifier( 'header', 'colored' ) // Inheriting 'header' and 'colored'
             )
         ) );
 
-        // Overriding inherited properties
+        // Partial overriding inherited property
         border: none;
     }
 
@@ -95,7 +94,7 @@ SCSS::
     }
 
     @include x-modifier('body') {
-        @include x-extend('block-body');    // extends `%block-body` like `@extend`
+        @include x-extend('block-body');    // Extending `%block-body` like `@extend`
 
         border: none;
     }
@@ -115,6 +114,7 @@ SCSS::
 
 Compiling it with Sass, you can get the clean output.
 
+CSS:
 ```css
 .block-header, .fancy-block-header, .alert-header, .block-footer, .fancy-block-footer, .alert-footer, .block-body, .fancy-block-body, .alert-body, .block {
   border: 0 solid #aaa;
@@ -167,7 +167,7 @@ Compiling it with Sass, you can get the clean output.
 To build moudlar CSS, you know there are some popular methodologies like [OOCSS](http://oocss.org/) / [SMACSS](http://smacss.com/) / [BEM](http://bem.info/) etc.
 In [Sass](http://sass-lang.com/) 3.0.0+, we can build CSS using BEM syntax like the following.
 
-SCSS::
+SCSS:
 ```scss
 .nav {    // Module
     @at-root {
@@ -285,7 +285,7 @@ and the source code will get to be unreadable because of the nested module varia
 
 As another solution, you might come up with using `@extend`.
 
-SCSS::
+SCSS:
 ```scss
 .nav {    // Module
     @at-root {
