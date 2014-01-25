@@ -18,12 +18,6 @@ A Sass mixin / function library for modular CSS.
 
 ![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
 
-## Requirement
-
-Crossass is a pure Sass mixin / function library, so really portable.
-
-* [Sass](http://sass-lang.com/) 3.3.0+
-
 ## Summary
 
 With Crossass, you can build modular CSS as below!
@@ -324,6 +318,12 @@ To extend parent module's elements, you hava to use `@extend` for the each eleme
 Crossass aims to be a Sass mixin / function library for easily building modular CSS.
 
 ##Usage
+
+### Requirement
+
+Crossass is a pure Sass mixin / function library, so really portable.
+
+* [Sass](http://sass-lang.com/) 3.3.0+
 
 ### Import
 
