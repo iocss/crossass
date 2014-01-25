@@ -27,11 +27,12 @@ $x--contexts: (
 @import "selector";
 
 // Returns prefixed value(s) for selector
-// @function x-prefixer
+// @function x--prefixer
+// @private
 // @param    $prefix    {String}      The prefix to add
 // @param    $names     {String|List} A modifier name(s)
 // @return              {List}        The list of the prefixed $names
-@function x-prefixer($prefix, $names) {
+@function x--prefixer($prefix, $names) {
     $prefixed: ();
 
     @each $name in $names {
@@ -54,7 +55,7 @@ $x--contexts: (
         @return $modifier;
     }
 
-    @return x-prefixer($x-modifier-separator, $names);
+    @return x--prefixer($x-modifier-separator, $names);
 }
 
 // Returns the module-root selector

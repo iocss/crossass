@@ -22,7 +22,7 @@ $x-bem-element-separator: '__' !default;
         @return $modifier;
     }
 
-    @return x-prefixer($x-bem-modifier-separator, $names);
+    @return x--prefixer($x-bem-modifier-separator, $names);
 }
 
 // Generates and Returns suffix(es) from element name(s)
@@ -38,7 +38,7 @@ $x-bem-element-separator: '__' !default;
         @return $modifier;
     }
 
-    @return x-prefixer($x-bem-element-separator, $names);
+    @return x--prefixer($x-bem-element-separator, $names);
 }
 
 // Defines modifier
