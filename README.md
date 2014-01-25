@@ -5,7 +5,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 ## Features
 
 * Module definition
-* Module exporting (as class selector)
+* Module exporting (with namespace support)
 * Modifier support (also the nesting)
 * Modifier-level inheritance (from parent ruleset)
 * Module-level inheritance (from parent module, **including the modifiers!**)
@@ -22,7 +22,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 1. Add public API to get Module ~~name, parent,~~ modifiers(?).
 2. Add public API to get parent & current modifers(?).
-3. Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
+3. ~~Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.~~
 4. Make x-extend() mixin to be more flexible, robust.
 5. Almost done all I want to.
 6. Live Template for IntelliJ IDEA family (PhpStorm, WebStorm etc.) I use, maybe.
@@ -165,26 +165,26 @@ SCSS:
         border: none;
     }
 
-    @include x-modifier('body') {
-        @include x-extend('block-body');  // Extending `%block-body` like `@extend`
+    @include x-modifier( 'body' ) {
+        @include x-extend( 'block-body' );  // Extending `%block-body` like `@extend`
 
         border: none;
     }
 }
 
 // 'alert' module extends 'fancy-block' module
-@include x-module-extend('alert', 'fancy-block', true) {
+@include x-module-extend( 'alert', 'fancy-block', true ) {
     // Automatic Module-level inheritance, including the parent Module's Modifiers!
 
     // Partial overriding inherited properties from parent Module's root
     border-color: #f66;
 
     // Overriding inherited Modifiers from parent Module's Modifiers
-    @include x-modifier('header', 'footer') {
+    @include x-modifier( 'header', 'footer' ) {
         background: #faa;
     }
 
-    @include x-modifier('body') {
+    @include x-modifier( 'body' ) {
         &::before {
             // Referencing Module-root selector by `x-root()` function
             // `alert module (%alert) extends fancy-block.`
@@ -193,27 +193,35 @@ SCSS:
         }
     }
 }
+
+// 'wysiwyg-block' module extends 'block' module
+@include x-module-extend( 'block-editable', 'block' ) {
+    margin: 1em;
+}
+
+// Exporting a module with a namespace-scoped ruleset
+@include x-export( 'block-editable', 'wysiwyg' );
 ```
 
 Compiling it with Sass, you can get the clean output.
 
 CSS:
 ```css
-.block-header, .fancy-block-header, .alert-header, .block-footer, .fancy-block-footer, .alert-footer, .block-body, .fancy-block-body, .alert-body, .block {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .block, .wysiwyg .block-editable {
   border: 0 solid #aaa;
 }
-.block-header, .fancy-block-header, .alert-header {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header {
   padding: .5em;
   border-width: 1px;
 }
-.block-footer, .fancy-block-footer, .alert-footer {
+.block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer {
   padding: .5em;
   border-width: 1px;
 }
-.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer {
+.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-colored {
   background: #ccc;
 }
-.block-body, .fancy-block-body, .alert-body {
+.block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body {
   padding: .5em;
   border-right-width: 1px;
   border-left-width: 1px;
@@ -246,6 +254,10 @@ CSS:
 .alert-body::before {
   content: "alert (%alert) extends fancy-block.";
   display: block;
+}
+
+.wysiwyg .block-editable {
+  margin: 1em;
 }
 ```
 

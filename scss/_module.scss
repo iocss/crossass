@@ -320,10 +320,12 @@ $x--contexts: (
 // Exports a module and the descendant rulesets as classes
 // @mixin x-export
 // @param $name      {String} The module name
-@mixin x-export($name) {
+// @param $namespace {String} The namespace to be prepended to each selector
+@mixin x-export($name, $namespace: null) {
+    $namespace: if(x-is-null($namespace), '', '.' + $namespace + ' ');
     $modifiers: x-module--attr($name, 'modifiers');
 
-    .#{$name} {
+    #{$namespace}.#{$name} {
         @if x-module--has-parent($name) {
             $parent-name: x-module--attr($name, 'parent');
             $parent-modifiers: x-module--attr($parent-name, 'modifiers');
@@ -338,14 +340,14 @@ $x--contexts: (
                 $parent-modifiers: x-module--attr($parent-name, 'modifiers');
 
                 @each $parent-modifier in $parent-modifiers {
-                    .#{$name}#{$parent-modifier} {
+                    #{$namespace}.#{$name}#{$parent-modifier} {
                         @include x--extend('%#{$parent-name}#{$parent-modifier}');
                     }
                 }
             }
 
             @each $modifier in $modifiers {
-                .#{$name}#{$modifier} {
+                #{$namespace}.#{$name}#{$modifier} {
                     @include x--extend('%#{$name}#{$modifier}');
                 }
             }
