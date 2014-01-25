@@ -9,19 +9,35 @@ $x-bem-modifier-separator: '--' !default;
 // The separator for element
 $x-bem-element-separator: '__' !default;
 
-// Generates and Returns a selector for modifier
+// Generates and Returns suffix(es) from modifier name(s)
 // @function x-bem-modifier
-// @param    $names         {String...} A modifier name
-// @return                  {List}      The list of selectors
+// @param    $names         {String...} The modifier name(s),
+//                                      or the modifier name in the current context
+//                                         if null or nothing is passed
+// @return                  {List}      The list of the suffix(es)
 @function x-bem-modifier($names...) {
+    @if x-is-null($names) or length($names) == 0 {
+        $modifier: x-module--context('modifier');
+
+        @return $modifier;
+    }
+
     @return x-prefixer($x-bem-modifier-separator, $names);
 }
 
-// Generates and Returns a selector for element
+// Generates and Returns suffix(es) from element name(s)
 // @function x-bem-element
-// @param    $names        {String...} An element name
-// @return                 {List}      The list of selectors
+// @param    $names        {String...} The element name(s),
+//                                     or the element name in the current context
+//                                        if null or nothing is passed
+// @return                 {List}      The list of the suffix(es)
 @function x-bem-element($names...) {
+    @if x-is-null($names) or length($names) == 0 {
+        $modifier: x-module--context('modifier');
+
+        @return $modifier;
+    }
+
     @return x-prefixer($x-bem-element-separator, $names);
 }
 
@@ -40,7 +56,7 @@ $x-bem-element-separator: '__' !default;
 
                 $suffix: x-bem-modifier($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
-                $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
+                $modifier-context: x-module--context('modifier', $modifier);
 
                 #{&}#{$suffix} {
                     @content;
@@ -67,7 +83,7 @@ $x-bem-element-separator: '__' !default;
 
                 $suffix: x-bem-element($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
-                $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
+                $modifier-context: x-module--context('modifier', $modifier);
 
                 #{&}#{$suffix} {
                     @content;

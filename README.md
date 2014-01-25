@@ -21,7 +21,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 ## Roadmap
 
 1. Add public API to get Module ~~name, parent,~~ modifiers(?).
-2. Add public API to get parent & current modifers(?).
+2. Add public API to get parent & ~~current~~ modifers(?).
 3. ~~Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.~~
 4. Make x-extend() mixin to be more flexible, robust.
 5. Almost done all I want to.
@@ -166,6 +166,14 @@ SCSS:
         border: none;
     }
 
+    @include x-modifier( 'colored' ) {
+        @include x-extend( (
+            block: (          // From 'block' module,
+                x-modifier()  // Inheriting same Modifier, 'colored' in this context
+            )
+        ) );
+    }
+
     @include x-modifier( 'body' ) {
         @include x-extend( 'block-body' );  // Extending `%block-body` like `@extend`
 
@@ -219,7 +227,7 @@ CSS:
   padding: .5em;
   border-width: 1px;
 }
-.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-colored {
+.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .fancy-block-colored, .alert-colored, .wysiwyg .block-editable-colored {
   background: #ccc;
 }
 .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body {
