@@ -340,21 +340,22 @@ $x--contexts: (
     $modifier-context: ();
 
     @at-root {
-        @each $name in $names {
-            $name: unquote($name);
+        @if x--is-modifiable(#{&}) {
+            $parent-context: x-module--context('parent', #{&});
 
-            @if x--is-modifiable(#{&}) {
+            @each $name in $names {
+                $name: unquote($name);
+
                 $suffix: x-modifier($name);
                 $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
-                $parent-context: x-module--context('parent', #{&});
                 $modifier-context: x-module--context('modifier', join($modifier-context, $modifier));
 
                 #{&}#{$suffix} {
                     @content;
                 }
-            } @else {
-                @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
             }
+        } @else {
+            @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
         }
     }
 }
