@@ -1,6 +1,6 @@
 # Crossass
 
-A Sass mixin / function library for modular CSS.
+A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM etc.).
 
 ## Features
 
