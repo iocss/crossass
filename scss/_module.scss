@@ -58,6 +58,26 @@ $x--contexts: (
     @return '%#{$module}';
 }
 
+// Returns the module name in the current context
+// @function x-module-name
+// @return   {String} The module name
+@function x-module-name() {
+    @return x-module--context('module');
+}
+
+// Returns the parent module name of a module
+// @function x-module-parent
+// @param    $name {String} The module name having the parent module,
+//                          or the module name in the current context is used by the default
+// @return         {String} The parent module name
+@function x-module-parent($name: null) {
+    @if x-is-null($name) {
+        $name: x-module-name();
+    }
+
+    @return x-module--attr($name, 'parent');
+}
+
 // Returns whether a selector is a single class selecotr or placeholder
 // @function x--is-modifiable
 // @private

@@ -20,11 +20,12 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 ## Roadmap
 
-1. Add public API to get Module name, parent, modifiers.
+1. Add public API to get Module ~~name, parent,~~ modifiers(?).
 2. Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
 3. Make x-extend() mixin to be more flexible, robust.
 4. Almost done all I want to.
 5. Use more, test more.
+
 
 ## Summary
 
@@ -115,8 +116,8 @@ SCSS:
     @include x-modifier('body') {
         &::before {
             // Referencing Module-root selector by `x-root()` function
-            // `This is an element of '%alert'.`
-            content: "This is an element of '#{x-root()}'.";
+            // `alert module (%alert) extends fancy-block.`
+            content: "#{x-module-name()} (#{x-root()}) extends #{x-module-parent()}.";
             display: block;
         }
     }
@@ -172,7 +173,7 @@ CSS:
   background: #faa;
 }
 .alert-body::before {
-  content: "This is an element of '%alert'.";
+  content: "alert (%alert) extends fancy-block.";
   display: block;
 }
 ```
