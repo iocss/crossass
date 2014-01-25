@@ -37,8 +37,9 @@ SCSS::
     border: 0 solid #aaa;
 
     // Element definition using Modifier
-    @include x-modifier( 'header', 'footer' ) {    // Multiple definitions at once
-        @include x-parent();    // Modifier-level inheritance (from the parent ruleset)
+    @include x-modifier( 'header', 'footer' ) {  // Multiple definitions at once
+        // Modifier-level inheritance (from the parent ruleset)
+        @include x-parent();
 
         padding: .5em;
         border-width: 1px;
@@ -47,13 +48,14 @@ SCSS::
     @include x-modifier( 'colored' ) {
         background: #ccc;
 
-        @include x-modifier( 'dark' ) {    // Nested Modifier for parent modifiers
+        @include x-modifier( 'dark' ) {  // Nested Modifier for parent modifiers
             color: #fff;
             background: #888;
         }
     }
 
-    @include x-modifier( 'body' ) {   // Modifier produces selector(s) like `%block-body`
+    // Modifier produces selector(s) like `%block-body`
+    @include x-modifier( 'body' ) {
         @include x-parent();
 
         padding: .5em;
@@ -64,7 +66,7 @@ SCSS::
 @include x-export( 'block' );    // Exporting as class selectors
 
 // 'fancy-block' module
-@include x-module( 'fancy-block', true ) {    // Exporting with the module definition
+@include x-module( 'fancy-block', true ) { // Exporting with the module definition
     border: 4px solid #aaa;
     border-radius: 16px;
     overflow: hidden;
