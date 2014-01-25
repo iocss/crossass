@@ -9,7 +9,7 @@ $x-module-exporting: false !default;
 // The separator for modifiers
 $x-modifier-separator: '-' !default;
 
-// `x-extend` mixin uses `!optional` if true
+// Crossass never use `!optional` with `@extend` if true
 $x-strict-extend: false !default;
 
 // The module storage to be used for storing module information
