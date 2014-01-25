@@ -18,6 +18,14 @@ A Sass mixin / function library for modular CSS.
 
 ![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
 
+## Roadmap
+
+# Add public API to get Module name, parent, modifiers.
+# Exporting with namespace like `.namespace .module`, `.namespace .module-modifier`.
+# Make x-extend() mixin to be more flexible, robust.
+# Almost done all I want to.
+# Use more, test more.
+
 ## Summary
 
 With Crossass, you can build modular CSS as below!
