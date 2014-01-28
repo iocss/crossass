@@ -195,7 +195,9 @@ SCSS:
     @include x-modifier( 'body' ) {
         &::before {
             // Referencing Module-root selector by `x-root()` function
-            // `alert module (%alert) extends fancy-block.`
+            // Referencing Module name by `x-module-name()` function
+            // Referencing Module parent's name by `x-module-parent()` function
+            // `alert (%alert) extends fancy-block.`
             content: "#{x-module-name()} (#{x-root()}) extends #{x-module-parent()}.";
             display: block;
         }
