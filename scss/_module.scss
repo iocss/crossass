@@ -67,6 +67,13 @@ $x--contexts: (
     @return '%#{$module}';
 }
 
+// Returns the parent modifier's selector
+// @function x-parent
+// @return   {String} The selector
+@function x-parent() {
+    @return x-module--context('parent');
+}
+
 // Returns the module name in the current context
 // @function x-module-name
 // @return   {String} The module name
