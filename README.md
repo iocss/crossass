@@ -127,7 +127,7 @@ SCSS:
     // `%block-body` in this context
     @include x-modifier( 'body' ) {
         // Modifier-level inheritance using x-parent() function
-        // This is the same expression as `@include x-parent()`
+        // This is the same effect as `@include x-parent()`
         @include x-extend(x-parent());
 
         padding: .5em;
