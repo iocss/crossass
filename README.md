@@ -50,7 +50,7 @@ SCSS:
 }
 
 // 'alert' module extends 'fancy-block' module
-// wtth exporting as class selectors
+// with exporting using class selectors
 @include x-module-extend( 'fancy-block', 'block', true ) {
     // Automatic Module-level inheritance, including the parent Module's Modifiers!
 
@@ -135,7 +135,7 @@ SCSS:
         border-left-width: 1px;
     }
 }
-@include x-export( 'block' );    // Exporting a module as class selectors
+@include x-export( 'block' );    // Exporting a module using class selectors
 
 // 'fancy-block' module
 @include x-module( 'fancy-block', true ) { // Exporting with the module definition
