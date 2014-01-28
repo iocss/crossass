@@ -14,6 +14,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 * Selector Helper
 * BEM syntax support
 * Variable inspection (Crossass Inspector)
+* [Live Templates](https://github.com/whizark/crossass-live-templates) for IntelliJ IDEA family (PhpStorm, WebStorm etc.)
 * No dependencies (except for Sass)
 
 ![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
@@ -26,7 +27,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 4. Make x-extend() mixin to be more flexible, robust.
 5. Almost done all I want to do.
 6. Update document (code in Summary section is always the latest example).
-7. Live Template for IntelliJ IDEA family (PhpStorm, WebStorm etc.) I use, maybe.
+7. ~~Live Template for IntelliJ IDEA family (PhpStorm, WebStorm etc.) I use, maybe.~~
 8. Use more, test more.
 
 ## Summary
