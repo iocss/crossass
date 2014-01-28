@@ -14,7 +14,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 * Selector Helper
 * BEM syntax support
 * Variable inspection (Crossass Inspector)
-* [Live Templates](https://github.com/whizark/crossass-live-templates) for IntelliJ IDEA family (PhpStorm, WebStorm etc.)
+* [Live Templates](https://github.com/whizark/crossass-live-templates) for JetBrains IntelliJ IDEA family (PhpStorm, WebStorm etc.)
 * No dependencies (except for Sass)
 
 ![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
