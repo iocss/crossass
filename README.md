@@ -109,7 +109,7 @@ SCSS:
 
     // Element definition using Modifier
     @include x-modifier( 'header', 'footer' ) {  // Multiple definitions at once
-        // Modifier-level inheritance (from the parent ruleset)
+        // Modifier-level inheritance (from the parent Modifier's ruleset)
         // Inheritting `%block` in this context
         @include x-parent();
 
