@@ -21,7 +21,7 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 ## Roadmap
 
-1. Make x-extend() mixin to be more flexible, robust.
+1. Make `x-extend()` mixin to be more flexible, robust.
 2. Almost done all I want to do.
 3. Update document (code in Summary section is always the latest example).
 4. Use more, test more.
@@ -126,7 +126,9 @@ SCSS:
     // Modifier produces `%<module name>-<modifier name>` selector(s)
     // `%block-body` in this context
     @include x-modifier( 'body' ) {
-        @include x-parent();
+        // Modifier-level inheritance using x-parent() function
+        // This is the same expression as `@include x-parent()`
+        @include x-extend(x-parent());
 
         padding: .5em;
         border-right-width: 1px;
@@ -172,7 +174,7 @@ SCSS:
     }
 
     @include x-modifier( 'body' ) {
-        @include x-extend( 'block-body' );  // Extending `%block-body` like `@extend`
+        @include x-extend( '%block-body' );  // Extending `%block-body` like `@extend`
 
         border: none;
     }
@@ -681,7 +683,7 @@ SCSS:
   border: 1px solid #f00;
 }
 .module {
-  @include x-extend('module');
+  @include x-extend('%module');
 }
 ```
 
@@ -702,7 +704,7 @@ SCSS:
   border: 1px solid #f00;
 }
 .module {
-  @include x-extend('module') {
+  @include x-extend('%module') {
     border-width: 2px;
   }
 }
@@ -731,7 +733,7 @@ SCSS:
   background: #000;
 }
 .module {
-  @include x-extend('module-1', 'module-2');
+  @include x-extend('%module-1', '%module-2');
 }
 ```
 
@@ -758,7 +760,7 @@ SCSS:
   background: #000;
 }
 .module {
-  @include x-extend('module-1', 'module-2');
+  @include x-extend('%module-1', '%module-2');
 }
 ```
 

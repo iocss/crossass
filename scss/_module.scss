@@ -421,7 +421,7 @@ $x--contexts: (
 
             & {
                 @if x-is-empty($suffixes) {
-                    @include x--extend('%#{$name}');
+                    @include x--extend('#{$name}');
                 }
 
                 @each $suffix in $suffixes {
