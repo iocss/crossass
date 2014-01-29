@@ -55,7 +55,8 @@ $x-bem-element-separator: '__' !default;
                 $name: unquote($name);
 
                 $suffix: x-bem-modifier($name);
-                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
+                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
                 $modifier-context: x-module--context('modifier', $modifier);
 
                 #{&}#{$suffix} {
@@ -82,7 +83,8 @@ $x-bem-element-separator: '__' !default;
                 $name: unquote($name);
 
                 $suffix: x-bem-element($name);
-                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
+                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
                 $modifier-context: x-module--context('modifier', $modifier);
 
                 #{&}#{$suffix} {

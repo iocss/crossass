@@ -197,6 +197,30 @@ $x--contexts: (
     @return $value;
 }
 
+// Guesses and returns Full-Qualified-Modifier-Name from a selector.
+// @function x-module--guess-modifier
+// @private
+// @param    $selector {String}      The selector to make the guess.
+// @return             {String|Null} The Full-Quliafied-Modifier-Name in a Module context,
+//                                   otherwise null
+@function x-module--guess-modifier($selector) {
+    $module-name: x-module--context('module');
+
+    @if x-is-null($module-name) {
+        @return null;
+    }
+
+    $sliced-selector: str-slice($selector, 2);
+
+    @if str-index($sliced-selector, $module-name) != 1 {
+        @return null;
+    }
+
+    $modifier: str-slice($sliced-selector, str-length($module-name) + 1);
+
+    @return $modifier;
+}
+
 // Registers new modifier for a module
 // @function x-module--add-modifier
 // @private
@@ -385,7 +409,8 @@ $x--contexts: (
                 $name: unquote($name);
 
                 $suffix: x-modifier($name);
-                $modifier: x-module--add-modifier(x-module--context('module'), #{$suffix});
+                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
+                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
                 $modifier-context: x-module--context('modifier', $modifier);
 
                 #{&}#{$suffix} {
