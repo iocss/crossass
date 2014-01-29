@@ -217,7 +217,7 @@ SCSS:
 
 // Importing a module into other rulesets
 .preview {
-    // This is the aliase of `@include x-export( 'block-editable' )`
+    // This is the alias of `@include x-export( 'block-editable' )`
     @include x-import( 'block-editable' );
 }
 ```
