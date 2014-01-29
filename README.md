@@ -5,8 +5,9 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 ## Features
 
 * Module definition
-* Module exporting (with namespace support)
 * Modifier support (also the nesting)
+* Module exporting (with namespace support)
+* Module importing (with the modifiers)
 * Modifier-level inheritance (from parent ruleset)
 * Module-level inheritance (from parent module, **including the modifiers!**)
 * Multiple inheritance
@@ -213,27 +214,37 @@ SCSS:
 
 // Exporting a module as namespace-scoped rulesets
 @include x-export( 'block-editable', 'wysiwyg' );
+
+// Importing a module into other rulesets
+.preview {
+    // This is the aliase of `@include x-export( 'block-editable' )`
+    @include x-import( 'block-editable' );
+}
 ```
 
 Compiling it with Sass, you can get the clean output.
 
 CSS:
 ```css
-.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .block, .wysiwyg .block-editable {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-editable-header, .block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-editable-footer, .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-editable-body, .block, .wysiwyg .block-editable, .preview .block-editable {
   border: 0 solid #aaa;
 }
-.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-editable-header {
   padding: .5em;
   border-width: 1px;
 }
-.block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer {
+.block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-editable-footer {
   padding: .5em;
   border-width: 1px;
 }
-.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .fancy-block-colored, .alert-colored, .wysiwyg .block-editable-colored {
+.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .fancy-block-colored, .alert-colored, .wysiwyg .block-editable-colored, .preview .block-editable-colored {
   background: #ccc;
 }
-.block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body {
+.block-colored-dark, .wysiwyg .block-editable-colored-dark, .preview .block-editable-colored-dark {
+  color: #fff;
+  background: #888;
+}
+.block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-editable-body {
   padding: .5em;
   border-right-width: 1px;
   border-left-width: 1px;
@@ -268,7 +279,7 @@ CSS:
   display: block;
 }
 
-.wysiwyg .block-editable {
+.wysiwyg .block-editable, .preview .block-editable {
   margin: 1em;
 }
 ```

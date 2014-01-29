@@ -357,6 +357,13 @@ $x--contexts: (
     }
 }
 
+// Imports a module and the descendant rulesets
+// @mixin x-import
+// @param $name      {String} The module name
+@mixin x-import($name) {
+    @include x-export($name);
+}
+
 // Exports a module and the descendant rulesets as classes
 // @mixin x-export
 // @param $name      {String} The module name
@@ -373,24 +380,22 @@ $x--contexts: (
         }
 
         @include x--extend('%#{$name}');
+    }
 
-        @at-root {
-            @if x-module--has-parent($name) {
-                $parent-name: x-module--attr($name, 'parent');
-                $parent-modifiers: x-module--attr($parent-name, 'modifiers');
+    @if x-module--has-parent($name) {
+        $parent-name: x-module--attr($name, 'parent');
+        $parent-modifiers: x-module--attr($parent-name, 'modifiers');
 
-                @each $parent-modifier in $parent-modifiers {
-                    #{$namespace}.#{$name}#{$parent-modifier} {
-                        @include x--extend('%#{$parent-name}#{$parent-modifier}');
-                    }
-                }
+        @each $parent-modifier in $parent-modifiers {
+            #{$namespace}.#{$name}#{$parent-modifier} {
+                @include x--extend('%#{$parent-name}#{$parent-modifier}');
             }
+        }
+    }
 
-            @each $modifier in $modifiers {
-                #{$namespace}.#{$name}#{$modifier} {
-                    @include x--extend('%#{$name}#{$modifier}');
-                }
-            }
+    @each $modifier in $modifiers {
+        #{$namespace}.#{$name}#{$modifier} {
+            @include x--extend('%#{$name}#{$modifier}');
         }
     }
 }
