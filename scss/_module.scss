@@ -42,6 +42,22 @@ $x--contexts: (
     @return $prefixed;
 }
 
+// Generates and Returns module selector(s) from module name(s)
+// @function x-module
+// @param    $names     {String...} The module name(s),
+//                                  or the module name in the current context
+//                                     if null or nothing is passed
+// @return              {List}      The list of the selector(s)
+@function x-module($names...) {
+    @if x-is-null($names) or length($names) == 0 {
+        $module: x-module--context('module');
+
+        @return $module;
+    }
+
+    @return x--prefixer('%', $names);
+}
+
 // Generates and Returns suffix(es) from modifier name(s)
 // @function x-modifier
 // @param    $names     {String...} The modifier name(s),
@@ -455,7 +471,7 @@ $x--contexts: (
                 }
 
                 @each $suffix in $suffixes {
-                    @include x--extend('%#{$name}#{$suffix}');
+                    @include x--extend('#{$name}#{$suffix}');
                 }
             }
         }

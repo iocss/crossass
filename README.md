@@ -149,7 +149,7 @@ SCSS:
     @include x-modifier( 'header' ) {
         // Selectable and Multiple extending
         @include x-extend( (
-            block: (                              // From 'block' module,
+            x-module('block'): (                  // From 'block' module,
                 x-modifier( 'header', 'colored' ) // Inheriting 'header' and 'colored'
             )
         ) );
@@ -160,7 +160,7 @@ SCSS:
 
     @include x-modifier('footer') {
         @include x-extend( (
-            block: (
+            x-module('block'): (
                 x-modifier( 'footer', 'colored' )
             )
         ) );
@@ -170,8 +170,8 @@ SCSS:
 
     @include x-modifier( 'colored' ) {
         @include x-extend( (
-            block: (          // From 'block' module,
-                x-modifier()  // Inheriting same Modifier, 'colored' in this context
+            x-module('block'): (    // From 'block' module,
+                x-modifier()        // Inheriting same Modifier, 'colored' in this context
             )
         ) );
     }
@@ -810,7 +810,7 @@ SCSS:
 }
 @include x-module('alert', true) {
   @include x-extend((
-    block: ('-header', '-body')
+    '%block': ('-header', '-body')
   ));
   background: #f00;
 }
@@ -896,7 +896,7 @@ SCSS:
 }
 @include x-module('alert', true) {
   @include x-extend((
-    block: (x-modifier('body'))
+    x-module('block'): (x-modifier('body'))
   ));
   background: #f00;
 }
@@ -934,9 +934,10 @@ SCSS:
 }
 @include x-module('alert', true) {
   @include x-extend((
-    block: (
+    x-module('block'): (
       x-modifier('header', 'body'),
       x-modifier('footer')
+    )
   ));
   background: #f00;
 }
