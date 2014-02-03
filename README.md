@@ -171,10 +171,13 @@ SCSS:
 
     @include x-modifier( 'colored' ) {
         @include x-extend( (
-            x-module('block'): (    // From 'block' module,
-                x-modifier()        // Inheriting same Modifier, 'colored' in this context
+            x-module('block'): (  // From 'block' module,
+                x-modifier()      // Inheriting same Modifier, 'colored' in this context
             )
         ) );
+
+        // You can also use interpolation as below
+        // @include x-extend( #{x-module('block')}#{x-modifier()} );
     }
 
     @include x-modifier( 'body' ) {
