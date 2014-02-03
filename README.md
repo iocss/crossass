@@ -214,7 +214,10 @@ SCSS:
             // Referencing Module-root selector by `x-root()` function
             // Referencing Module name by `x-module-name()` function
             // Referencing Module parent's name by `x-module-parent()` function
-            // `alert (%alert) extends fancy-block.`
+            //
+            // Note: You can use x-module-parent() only inside x-module-extend()
+            //
+            // `content: "block-editable (%block-editable) extends block."`;
             content: "#{x-module-name()} (#{x-root()}) extends #{x-module-parent()}.";
             display: block;
         }
