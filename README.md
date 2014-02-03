@@ -52,10 +52,11 @@ SCSS:
     }
 }
 
-// 'alert' module extends 'fancy-block' module
-// with exporting using class selectors
-@include x-module-extend( 'fancy-block', 'block', true ) {
+// 'fancy-block' module with exporting using class selectors
+@include x-module( 'fancy-block', true ) {
+    // 'fancy-block' module extends 'block' modules
     // Automatic Module-level inheritance, including the parent Module's Modifiers!
+    @include x-extend( x-module( 'block' ) );
 
     // Partial overriding inherited properties from parent Module's root
     border-color: #f66;
