@@ -183,9 +183,11 @@ SCSS:
     }
 }
 
-// 'alert' module extends 'fancy-block' module
-@include x-module-extend( 'alert', 'fancy-block', true ) {
-    // Automatic Module-level inheritance, including the parent Module's Modifiers!
+// 'alert' module
+@include x-module( 'alert', true ) {
+    // 'alert' module extends 'fancy-block' module
+    // Automatic Module-level inheritance, including the specified Module's Modifiers!
+    @include x-extend(x-module('fancy-block'));
 
     // Partial overriding inherited properties from parent Module's root
     border-color: #f66;
@@ -194,6 +196,14 @@ SCSS:
     @include x-modifier( 'header', 'footer' ) {
         background: #faa;
     }
+}
+
+// 'block-editable' module extends 'block' module
+// Another way to extend other module with its modifiers
+@include x-module-extend( 'block-editable', 'block' ) {
+    // Automatic Module-level inheritance, including the parent Module's Modifiers!
+
+    margin: 1em;
 
     @include x-modifier( 'body' ) {
         &::before {
@@ -205,11 +215,6 @@ SCSS:
             display: block;
         }
     }
-}
-
-// 'block-editable' module extends 'block' module
-@include x-module-extend( 'block-editable', 'block' ) {
-    margin: 1em;
 }
 
 // Exporting a module as namespace-scoped rulesets
@@ -274,13 +279,13 @@ CSS:
 .alert-footer {
   background: #faa;
 }
-.alert-body::before {
-  content: "alert (%alert) extends fancy-block.";
-  display: block;
-}
 
 .wysiwyg .block-editable, .preview .block-editable {
   margin: 1em;
+}
+.wysiwyg .block-editable-body::before, .preview .block-editable-body::before {
+  content: "block-editable (%block-editable) extends block.";
+  display: block;
 }
 ```
 

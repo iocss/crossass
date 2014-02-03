@@ -110,6 +110,17 @@ $x--contexts: (
     @return x-module--attr($name, 'parent');
 }
 
+// Returns whether a selector is a module placeholder
+// @function x--is-module
+// @private
+// @param    $selector {String} The selector to be test
+// @return             {Bool}   True if the selector is the module placeholder, otherwise false
+@function x--is-module($selector) {
+    $sliced: str-slice($selector, 2);
+
+    @return x-module-exists($sliced);
+}
+
 // Returns whether a selector is a single class selecotr or placeholder
 // @function x--is-modifiable
 // @private
@@ -468,6 +479,21 @@ $x--contexts: (
             & {
                 @if x-is-empty($suffixes) {
                     @include x--extend('#{$name}');
+                }
+
+                // Extends module modifiers
+                @if x--is-module('#{&}') and x--is-module($name) and x-is-empty($suffixes) {
+                    $modifiers: x-module--attr(str-slice($name, 2), 'modifiers');
+
+                    @each $modifier in $modifiers {
+                        $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+
+                        @at-root {
+                            #{&}#{$modifier} {
+                                @include x--extend('#{$name}#{$modifier}');
+                            }
+                        }
+                    }
                 }
 
                 @each $suffix in $suffixes {
