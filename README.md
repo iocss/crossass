@@ -54,7 +54,7 @@ SCSS:
 
 // 'fancy-block' module with exporting using class selectors
 @include x-module( 'fancy-block', true ) {
-    // 'fancy-block' module extends 'block' modules
+    // 'fancy-block' module extends 'block' module
     // Automatic Module-level inheritance, including the parent Module's Modifiers!
     @include x-extend( x-module( 'block' ) );
 
