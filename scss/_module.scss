@@ -482,11 +482,13 @@ $x--contexts: (
                 }
 
                 // Extends module modifiers
-                @if x--is-module('#{&}') and x--is-module($name) and x-is-empty($suffixes) {
+                @if x--is-modifiable('#{&}') and x--is-module($name) and x-is-empty($suffixes) {
                     $modifiers: x-module--attr(str-slice($name, 2), 'modifiers');
 
                     @each $modifier in $modifiers {
-                        $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+                        @if x--is-module('#{&}') {
+                            $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+                        }
 
                         @at-root {
                             #{&}#{$modifier} {
