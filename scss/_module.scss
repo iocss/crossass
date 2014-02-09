@@ -387,19 +387,22 @@ $x--contexts: (
 // Imports a module and the descendant rulesets
 // @mixin x-import
 // @param $name      {String} The module name
-@mixin x-import($name) {
-    @include x-export($name);
+// @param $alias     {String} The alias of the root selector
+@mixin x-import($name, $alias: null) {
+    @include x-export($name, null, $alias);
 }
 
 // Exports a module and the descendant rulesets as classes
 // @mixin x-export
 // @param $name      {String} The module name
 // @param $namespace {String} The namespace to be prepended to each selector
-@mixin x-export($name, $namespace: null) {
+// @param $alias     {String} The alias of the root selector
+@mixin x-export($name, $namespace: null, $alias: null) {
     $namespace: if(x-is-null($namespace), '', '.' + $namespace + ' ');
+    $alias    : if(x-is-null($alias), $name, $alias);
     $modifiers: x-module--attr($name, 'modifiers');
 
-    #{$namespace}.#{$name} {
+    #{$namespace}.#{$alias} {
         @if x-module--has-parent($name) {
             $parent-name: x-module--attr($name, 'parent');
             $parent-modifiers: x-module--attr($parent-name, 'modifiers');
@@ -414,14 +417,30 @@ $x--contexts: (
         $parent-modifiers: x-module--attr($parent-name, 'modifiers');
 
         @each $parent-modifier in $parent-modifiers {
-            #{$namespace}.#{$name}#{$parent-modifier} {
+            @if not x--is-modifiable('.#{$alias}') {
+                $warn: '"#{$namespace}.#{$alias}#{$parent-modifier}" might not properly extend';
+                $warn: $warn + ' "%#{$parent-name}#{$parent-modifier}"';
+                $warn: $warn + ' because the alias ".#{$alias}" isn\'t';
+                $warn: $warn + ' a single class selector or placeholder.';
+                @warn $warn;
+            }
+
+            #{$namespace}.#{$alias}#{$parent-modifier} {
                 @include x--extend('%#{$parent-name}#{$parent-modifier}');
             }
         }
     }
 
     @each $modifier in $modifiers {
-        #{$namespace}.#{$name}#{$modifier} {
+        @if not x--is-modifiable('.#{$alias}') {
+            $warn: '"#{$namespace}.#{$alias}#{$modifier}" might not properly extend';
+            $warn: $warn + ' "%#{$name}#{$modifier}"';
+            $warn: $warn + ' because the alias ".#{$alias}" isn\'t';
+            $warn: $warn + ' a single class selector or placeholder.';
+            @warn $warn;
+        }
+
+        #{$namespace}.#{$alias}#{$modifier} {
             @include x--extend('%#{$name}#{$modifier}');
         }
     }

@@ -6,8 +6,8 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 * Module definition
 * Modifier support (also the nesting)
-* Module exporting (with namespace support)
-* Module importing (with the modifiers)
+* Module exporting (with namespace / alias support)
+* Module importing (with the modifiers / alias support)
 * Modifier-level inheritance (from parent ruleset)
 * Module-level inheritance (from parent module, **including the modifiers!**)
 * Multiple inheritance
@@ -204,9 +204,9 @@ SCSS:
     }
 }
 
-// 'block-editable' module extends 'block' module
 // Another way to extend other module with its modifiers
-@include x-module-extend( 'block-editable', 'block' ) {
+// 'block-margined' module extends 'block' module
+@include x-module-extend( 'block-margined', 'block' ) {
     // Automatic Module-level inheritance, including the parent Module's Modifiers!
 
     margin: 1em;
@@ -219,20 +219,22 @@ SCSS:
             //
             // Note: You can use x-module-parent() only inside x-module-extend()
             //
-            // `content: "block-editable (%block-editable) extends block."`;
+            // `content: "block-margined (%block-margined) extends block."`;
             content: "#{x-module-name()} (#{x-root()}) extends #{x-module-parent()}.";
             display: block;
         }
     }
 }
 
-// Exporting a module as namespace-scoped rulesets
-@include x-export( 'block-editable', 'wysiwyg' );
+// Exporting a module as the alias with a namespace-scope
+// 'block-margined' module is exported as '.block-editable' with '.wysiwyg' scope.
+@include x-export( 'block-margined', 'wysiwyg', 'block-editable' );
 
-// Importing a module into other rulesets
+// Importing a module as the alias into other rulesets
 .preview {
-    // This is the alias of `@include x-export( 'block-editable' )`
-    @include x-import( 'block-editable' );
+    // This is the alias of
+    // `@include x-export( 'block-margined', null, 'block-draggable' )`
+    @include x-import( 'block-margined', 'block-draggable' );
 }
 ```
 
@@ -240,25 +242,25 @@ Compiling it with Sass, you can get the clean output.
 
 CSS:
 ```css
-.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-editable-header, .block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-editable-footer, .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-editable-body, .block, .wysiwyg .block-editable, .preview .block-editable {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-draggable-header, .block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-draggable-footer, .block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-draggable-body, .block, .wysiwyg .block-editable, .preview .block-draggable {
   border: 0 solid #aaa;
 }
-.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-editable-header {
+.block-header, .fancy-block-header, .alert-header, .wysiwyg .block-editable-header, .preview .block-draggable-header {
   padding: .5em;
   border-width: 1px;
 }
-.block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-editable-footer {
+.block-footer, .fancy-block-footer, .alert-footer, .wysiwyg .block-editable-footer, .preview .block-draggable-footer {
   padding: .5em;
   border-width: 1px;
 }
-.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .fancy-block-colored, .alert-colored, .wysiwyg .block-editable-colored, .preview .block-editable-colored {
+.block-colored, .fancy-block-header, .alert-header, .fancy-block-footer, .alert-footer, .fancy-block-colored, .alert-colored, .wysiwyg .block-editable-colored, .preview .block-draggable-colored {
   background: #ccc;
 }
-.block-colored-dark, .wysiwyg .block-editable-colored-dark, .preview .block-editable-colored-dark {
+.block-colored-dark, .wysiwyg .block-editable-colored-dark, .preview .block-draggable-colored-dark {
   color: #fff;
   background: #888;
 }
-.block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-editable-body {
+.block-body, .fancy-block-body, .alert-body, .wysiwyg .block-editable-body, .preview .block-draggable-body {
   padding: .5em;
   border-right-width: 1px;
   border-left-width: 1px;
@@ -289,11 +291,11 @@ CSS:
   background: #faa;
 }
 
-.wysiwyg .block-editable, .preview .block-editable {
+.wysiwyg .block-editable, .preview .block-draggable {
   margin: 1em;
 }
-.wysiwyg .block-editable-body::before, .preview .block-editable-body::before {
-  content: "block-editable (%block-editable) extends block.";
+.wysiwyg .block-editable-body::before, .preview .block-draggable-body::before {
+  content: "block-margined (%block-margined) extends block.";
   display: block;
 }
 ```
