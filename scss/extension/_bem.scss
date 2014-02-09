@@ -48,23 +48,35 @@ $x-bem-element-separator: '__' !default;
     $modifier-context: ();
 
     @at-root {
-        @if x--is-modifiable(#{&}) {
-            $parent-context: x-module--context('parent', #{&});
-
-            @each $name in $names {
-                $name: unquote($name);
-
-                $suffix: x-bem-modifier($name);
-                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
-                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
-                $modifier-context: x-module--context('modifier', $modifier);
-
-                #{&}#{$suffix} {
-                    @content;
-                }
-            }
-        } @else {
+        @if not x--is-modifiable(#{&}) {
             @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
+        }
+
+        $module-context: x-module--context('module');
+        $parent-context: x-module--context('parent', '#{&}');
+
+        @each $name in $names {
+            $name: unquote($name);
+
+            $suffix: x-bem-modifier($name);
+            $guessed-modifier: x-module--guess-modifier('#{&}#{$suffix}');
+            $modifier-context: x-module--context('modifier', $guessed-modifier);
+
+            // Adds the modifier to the module only in a module definition
+            @if x--is-modifiable('#{&}') and not x-is-null($guessed-modifier) {
+                $modifier: x-module--add-modifier($module-context, $guessed-modifier);
+            }
+
+            @if not x--is-modifiable('#{&}') {
+                $warn: '"#{&}#{$suffix}" might be an incorrect selector';
+                $warn: $warn + ' because the parent selector "#{&}" isn\'t';
+                $warn: $warn + ' a single class selector or placeholder.';
+                @warn $warn;
+            }
+
+            #{&}#{$suffix} {
+                @content;
+            }
         }
     }
 }
@@ -76,23 +88,35 @@ $x-bem-element-separator: '__' !default;
     $modifier-context: ();
 
     @at-root {
-        @if x--is-modifiable(#{&}) {
-            $parent-context: x-module--context('parent', #{&});
-
-            @each $name in $names {
-                $name: unquote($name);
-
-                $suffix: x-bem-element($name);
-                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
-                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
-                $modifier-context: x-module--context('modifier', $modifier);
-
-                #{&}#{$suffix} {
-                    @content;
-                }
-            }
-        } @else {
+        @if not x--is-modifiable(#{&}) {
             @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
+        }
+
+        $module-context: x-module--context('module');
+        $parent-context: x-module--context('parent', '#{&}');
+
+        @each $name in $names {
+            $name: unquote($name);
+
+            $suffix: x-bem-element($name);
+            $guessed-modifier: x-module--guess-modifier('#{&}#{$suffix}');
+            $modifier-context: x-module--context('modifier', $guessed-modifier);
+
+            // Adds the modifier to the module only in a module definition
+            @if x--is-modifiable('#{&}') and not x-is-null($guessed-modifier) {
+                $modifier: x-module--add-modifier($module-context, $guessed-modifier);
+            }
+
+            @if not x--is-modifiable('#{&}') {
+                $warn: '"#{&}#{$suffix}" might be an incorrect selector';
+                $warn: $warn + ' because the parent selector "#{&}" isn\'t';
+                $warn: $warn + ' a single class selector or placeholder.';
+                @warn $warn;
+            }
+
+            #{&}#{$suffix} {
+                @content;
+            }
         }
     }
 }

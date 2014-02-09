@@ -453,23 +453,31 @@ $x--contexts: (
     $modifier-context: ();
 
     @at-root {
-        @if x--is-modifiable(#{&}) {
-            $parent-context: x-module--context('parent', #{&});
+        $module-context: x-module--context('module');
+        $parent-context: x-module--context('parent', '#{&}');
 
-            @each $name in $names {
-                $name: unquote($name);
+        @each $name in $names {
+            $name: unquote($name);
 
-                $suffix: x-modifier($name);
-                $guessed-modifier: x-module--guess-modifier(#{&}#{$suffix});
-                $modifier: x-module--add-modifier(x-module--context('module'), $guessed-modifier);
-                $modifier-context: x-module--context('modifier', $modifier);
+            $suffix: x-modifier($name);
+            $guessed-modifier: x-module--guess-modifier('#{&}#{$suffix}');
+            $modifier-context: x-module--context('modifier', $guessed-modifier);
 
-                #{&}#{$suffix} {
-                    @content;
-                }
+            // Adds the modifier to the module only in a module definition
+            @if x--is-modifiable('#{&}') and not x-is-null($guessed-modifier) {
+                $modifier: x-module--add-modifier($module-context, $guessed-modifier);
             }
-        } @else {
-            @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
+
+            @if not x--is-modifiable('#{&}') {
+                $warn: '"#{&}#{$suffix}" might be an incorrect selector';
+                $warn: $warn + ' because the parent selector "#{&}" isn\'t';
+                $warn: $warn + ' a single class selector or placeholder.';
+                @warn $warn;
+            }
+
+            #{&}#{$suffix} {
+                @content;
+            }
         }
     }
 }
