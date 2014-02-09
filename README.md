@@ -35,6 +35,22 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 With Crossass, you can build modular CSS as below!
 
+HTML:
+```html
+<div class="fancy-block">
+    <div class="fancy-block-header">
+        <img class="fancy-block-header-icon" src="/assets/images/icon.png" alt="Icon">
+        Header
+    </div>
+    <div class="fancy-block-body">
+        Body
+    </div>
+    <div class="fancy-block-footer">
+        Footer
+    </div>
+</div>
+```
+
 SCSS:
 ```scss
 // Module definition
