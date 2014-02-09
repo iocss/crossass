@@ -482,7 +482,7 @@ $x--contexts: (
                 }
 
                 // Extends module modifiers
-                @if x--is-modifiable('#{&}') and x--is-module($name) and x-is-empty($suffixes) {
+                @if x--is-modifiable('#{&}') and x--is-module('#{$name}') and x-is-empty($suffixes) {
                     $modifiers: x-module--attr(str-slice($name, 2), 'modifiers');
 
                     @each $modifier in $modifiers {
