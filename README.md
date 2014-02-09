@@ -54,6 +54,13 @@ SCSS:
     }
 }
 
+// 'icon-containable' module
+@include x-module( 'icon-containable' ) {
+    @include x-modifier( 'icon' ) {
+        margin-right: 8px;
+    }
+}
+
 // 'fancy-block' module with exporting using class selectors
 @include x-module( 'fancy-block', true ) {
     // 'fancy-block' module extends 'block' module
@@ -65,9 +72,14 @@ SCSS:
     border-radius: 16px;
     overflow: hidden;
 
-    // Overriding inherited Modifiers from parent Module's Modifiers
+    // Partial Overriding inherited Modifiers from parent Module's Modifiers
     @include x-modifier( 'header', 'footer' ) {
         background: #faa;
+    }
+
+    @include x-modifier( 'header' ) {
+        // Extending a module with its Modifiers
+        @include x-extend(x-module('icon-containable'));
     }
 }
 ```
@@ -87,6 +99,10 @@ CSS:
 }
 .fancy-block-body {
   padding: .5em;
+}
+
+.fancy-block-header-icon {
+  margin-right: 8px;
 }
 
 .fancy-block {

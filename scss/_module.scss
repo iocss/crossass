@@ -493,6 +493,8 @@ $x--contexts: (
 // @param $modules {String|Map...} Module name(s) to extend, or map(s) to extend with module element(s)
 //                                 {module-name: ('suffix', ...), ...}
 @mixin x-extend($modules...) {
+    $module-context: x-module--context('module');
+
     @each $module in $modules {
         @if not x-is-map($module) {
             $module: (
@@ -513,8 +515,15 @@ $x--contexts: (
                     $modifiers: x-module--attr(str-slice($name, 2), 'modifiers');
 
                     @each $modifier in $modifiers {
-                        @if x--is-module('#{&}') {
-                            $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+                        $guessed-modifier: x-module--guess-modifier('#{&}#{$modifier}');
+
+                        // Adds the modifier to the module only in a module definition
+                        @if x--is-modifiable('#{&}') {
+                            @if x--is-module('#{&}') {
+                                $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+                            } @else if str-slice('#{$name}', 2) != $module-context and not x-is-null($guessed-modifier) {
+                                $_modifier: x-module--add-modifier($module-context, $guessed-modifier);
+                            }
                         }
 
                         @if not x--is-modifiable('#{&}') {
