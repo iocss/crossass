@@ -501,12 +501,20 @@ $x--contexts: (
                 }
 
                 // Extends module modifiers
-                @if x--is-modifiable('#{&}') and x--is-module('#{$name}') and x-is-empty($suffixes) {
+                @if x--is-module('#{$name}') and x-is-empty($suffixes) {
                     $modifiers: x-module--attr(str-slice($name, 2), 'modifiers');
 
                     @each $modifier in $modifiers {
                         @if x--is-module('#{&}') {
                             $modifier: x-module--add-modifier(str-slice('#{&}', 2), $modifier);
+                        }
+
+                        @if not x--is-modifiable('#{&}') {
+                            $warn: '"#{&}#{$modifier}" might not properly extend';
+                            $warn: $warn + ' "#{$name}#{$modifier}"';
+                            $warn: $warn + ' because the parent selector "#{&}" isn\'t';
+                            $warn: $warn + ' a single class selector or placeholder.';
+                            @warn $warn;
                         }
 
                         @at-root {
