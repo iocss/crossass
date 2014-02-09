@@ -79,7 +79,7 @@ SCSS:
 
     @include x-modifier( 'header' ) {
         // Extending a module with its Modifiers
-        @include x-extend(x-module('icon-containable'));
+        @include x-extend( x-module( 'icon-containable' ) );
     }
 }
 ```
@@ -150,7 +150,7 @@ SCSS:
     @include x-modifier( 'body' ) {
         // Modifier-level inheritance using x-parent() function
         // This is the same effect as `@include x-parent()`
-        @include x-extend(x-parent());
+        @include x-extend( x-parent() );
 
         padding: .5em;
         border-right-width: 1px;
@@ -168,7 +168,7 @@ SCSS:
     @include x-modifier( 'header' ) {
         // Selectable and Multiple extending
         @include x-extend( (
-            x-module('block'): (                  // From 'block' module,
+            x-module( 'block' ): (                // From 'block' module,
                 x-modifier( 'header', 'colored' ) // Inheriting 'header' and 'colored'
             )
         ) );
@@ -177,9 +177,9 @@ SCSS:
         border: none;
     }
 
-    @include x-modifier('footer') {
+    @include x-modifier( 'footer' ) {
         @include x-extend( (
-            x-module('block'): (
+            x-module( 'block' ): (
                 x-modifier( 'footer', 'colored' )
             )
         ) );
@@ -189,8 +189,8 @@ SCSS:
 
     @include x-modifier( 'colored' ) {
         @include x-extend( (
-            x-module('block'): (  // From 'block' module,
-                x-modifier()      // Inheriting same Modifier, 'colored' in this context
+            x-module( 'block' ): ( // From 'block' module, inheriting same Modifier
+                x-modifier()       // 'colored' in this context
             )
         ) );
 
@@ -209,7 +209,7 @@ SCSS:
 @include x-module( 'alert', true ) {
     // 'alert' module extends 'fancy-block' module
     // Automatic Module-level inheritance, including the specified Module's Modifiers!
-    @include x-extend(x-module('fancy-block'));
+    @include x-extend( x-module( 'fancy-block' ) );
 
     // Partial overriding inherited properties from parent Module's root
     border-color: #f66;
