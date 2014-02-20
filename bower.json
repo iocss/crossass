@@ -1,29 +1,33 @@
 {
-  "name": "crossass",
-  "version": "0.9.0",
-  "description": "A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM etc.).",
-  "keywords": [
-    "sass",
-    "mixin",
-    "function",
-    "library",
-    "framework",
-    "css",
-    "smacss",
-    "oocss",
-    "bem"
-  ],
-  "main": [
-    "scss/_core.scss"
-  ],
-  "ignore": [
-    "**/.*"
-  ],
-  "authors": [
-    { "name": "Whizark", "homepage": "http://whizark.com" }
-  ],
-  "homepage": "http://github.com/whizark/crossass",
-  "repository": {
-    "type": "git", "url": "git://github.com/whizark/crossass.git"
-  }
+    "name"       : "crossass",
+    "version"    : "0.9.0",
+    "description": "A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM etc.).",
+    "keywords"   : [
+        "sass",
+        "mixin",
+        "function",
+        "library",
+        "framework",
+        "css",
+        "smacss",
+        "oocss",
+        "bem"
+    ],
+    "main"       : [
+        "scss/_core.scss"
+    ],
+    "ignore"     : [
+        "**/.*"
+    ],
+    "authors"    : [
+        {
+            "name"    : "Whizark",
+            "homepage": "http://whizark.com"
+        }
+    ],
+    "homepage"   : "http://github.com/whizark/crossass",
+    "repository" : {
+        "type": "git",
+        "url" : "git://github.com/whizark/crossass.git"
+    }
 }
