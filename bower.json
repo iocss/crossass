@@ -13,6 +13,9 @@
     "oocss",
     "bem"
   ],
+  "main": [
+    "scss/_core.scss"
+  ],
   "ignore": [
     "**/.*"
   ],
