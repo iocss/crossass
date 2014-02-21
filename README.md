@@ -24,12 +24,13 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 1. Make `x-extend()` mixin to be more flexible, robust.
 2. Almost done all I want to do.
-3. Automatic prefixing for Module name by the variable to configure.
+3. Module hook to dynamically interrupt Module definition.
+4. Automatic prefixing for Module name by the variable to configure.
    e.g. `@include x-module('module', true) { ... }` produces `.my-module { ... }` selector(s).
-4. Module Mixin that imports other module and generates new selector(s) with mixin-ed Module's Modifier(s).
+5. Module Mixin that imports other module and generates new selector(s) with mixin-ed Module's Modifier(s).
    e.g. `@include x-mixin('navbar')` in `header` module produces new `header__navbar`, `header__navbar__item` selectors.
-5. Update document (code in Summary section is always the latest example).
-6. Use more, test more.
+6. Update document (code in Summary section is always the latest example).
+7. Use more, test more.
 
 ## Summary
 
