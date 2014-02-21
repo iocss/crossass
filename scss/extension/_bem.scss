@@ -48,10 +48,6 @@ $x-bem-element-separator: '__' !default;
     $modifier-context: ();
 
     @at-root {
-        @if not x--is-modifiable(#{&}) {
-            @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
-        }
-
         $module-context: x-module--context('module');
         $parent-context: x-module--context('parent', '#{&}');
 
@@ -88,10 +84,6 @@ $x-bem-element-separator: '__' !default;
     $modifier-context: ();
 
     @at-root {
-        @if not x--is-modifiable(#{&}) {
-            @warn 'The parent selector "#{&}" should be a single class selector or placeholder.';
-        }
-
         $module-context: x-module--context('module');
         $parent-context: x-module--context('parent', '#{&}');
 
