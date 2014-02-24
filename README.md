@@ -500,7 +500,7 @@ Crossass aims to be a Sass mixin / function library for easily building modular 
 
 Crossass is a pure Sass mixin / function library, so really portable.
 
-* [Sass](http://sass-lang.com/) 3.3.0+
+* [Sass](http://sass-lang.com/) 3.3.0.rc.1 - 3.3.0.rc.2
 
 ### Import
 
