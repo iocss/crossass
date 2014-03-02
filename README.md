@@ -14,11 +14,9 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 * Selectable inheritance
 * Selector Helper
 * BEM syntax support
-* Variable inspection (Crossass Inspector)
+* Variable inspection extension ([Crossass Inspector](https://github.com/whizark/crossass-inspector))
 * [Live Templates](https://github.com/whizark/crossass-live-templates) for JetBrains IntelliJ IDEA family (PhpStorm, WebStorm etc.)
 * No dependencies (except for Sass)
-
-![Crossass Inspector](http://raw.github.com/whizark/crossass/master/crossass-inspector.png)
 
 ## Roadmap
 
@@ -508,7 +506,6 @@ Crossass is a pure Sass mixin / function library, so really portable.
 ### Import
 
 ```scss
-@import "crossass/scss/environment/production";
 @import "crossass/scss/core";
 ```
 
@@ -1029,7 +1026,6 @@ Crossass also supports [BEM](http://bem.info/) syntax with BEM extension.
 ### Import
 
 ```scss
-@import "crossass/scss/environment/production";
 @import "crossass/scss/core";
 @import "crossass/scss/extension/bem";
 ```
