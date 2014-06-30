@@ -2,6 +2,14 @@
 
 A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM etc.).
 
+**After I struggled with the issues Sass/CSS specification has, new design for Modular CSS comes to my mind,
+which is more simple than Crossass but powerful & flexible.**
+
+**That's just the [Xass](https://github.com/whizark/xass).**
+
+**The naming is not so good... :p**
+**However, the Xass way will be useful for designing CSS component/mixin/function with Sass, even if you won't use Xass.**
+
 ## Features
 
 * Module definition
@@ -20,18 +28,19 @@ A Sass mixin / function library, framework for modular CSS (SMACSS, OOCSS, BEM e
 
 ## Roadmap
 
-1. 0.9.2: Support Sass 3.3.0.rc.3+ (drop support prior to 3.3.0.rc.2)
-2. 0.9.2: Add `x-class()` mixin to register class selector as parent context.
-3. 0.9.x: Merge BEM extension to core.
-4. Make `x-extend()` mixin to be more flexible, robust.
-5. Almost done all I want to do.
-6. Module hook to dynamically interrupt Module definition.
-7. Automatic prefixing for Module name by the variable to configure.
+1. *Development dropped*.
+2. 0.9.2: Support Sass 3.3.0.rc.3+ (drop support prior to 3.3.0.rc.2)
+3. 0.9.2: Add `x-class()` mixin to register class selector as parent context.
+4. 0.9.x: Merge BEM extension to core.
+5. Make `x-extend()` mixin to be more flexible, robust.
+6. Almost done all I want to do.
+7. Module hook to dynamically interrupt Module definition.
+8. Automatic prefixing for Module name by the variable to configure.
    e.g. `@include x-module('module', true) { ... }` produces `.my-module { ... }` selector(s).
-8. Module Mixin that imports other module and generates new selector(s) with mixin-ed Module's Modifier(s).
+9. Module Mixin that imports other module and generates new selector(s) with mixin-ed Module's Modifier(s).
    e.g. `@include x-mixin('navbar')` in `header` module produces new `header__navbar`, `header__navbar__item` selectors.
-9. Update document (code in Summary section is always the latest example).
-10. Use more, test more.
+10. Update document (code in Summary section is always the latest example).
+11. Use more, test more.
 
 ## Summary
 
